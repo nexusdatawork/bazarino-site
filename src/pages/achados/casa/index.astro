@@ -1,0 +1,30 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+
+const top10 = [
+  "Air Fryer SmartCook",
+  "Aspirador RoboClean",
+  "Cafeteira Aroma Plus",
+  "Panela Elétrica Chef",
+  "Ventilador SilentAir",
+  "Purificador de Água Pure",
+  "Jogo de Panelas Inox",
+  "Liquidificador PowerMix",
+  "Lâmpada Smart Light",
+  "Organizador Modular"
+];
+---
+
+<Layout title="Casa | Achados Bazarino">
+  <h1 class="text-3xl font-semibold text-slate-900">
+    Casa
+  </h1>
+
+  <p class="mt-4 text-slate-600">
+    Top 10 achados para casa (conteúdo fictício).
+  </p>
+
+  <ol class="mt-8 list-decimal space-y-2 pl-6 text-slate-700">
+    {top10.map((item) => <li>{item}</li>)}
+  </ol>
+</Layout>

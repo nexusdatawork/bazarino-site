@@ -1,0 +1,19 @@
+---
+const { title, price, category } = Astro.props;
+---
+
+<div class="rounded-xl border border-slate-200 p-4">
+  <p class="text-sm text-slate-500">{category}</p>
+
+  <h3 class="mt-1 font-semibold text-slate-900">
+    {title}
+  </h3>
+
+  <p class="mt-2 font-medium text-slate-700">
+    R$ {price}
+  </p>
+
+  <button class="mt-4 w-full rounded-lg bg-slate-900 py-2 text-sm text-white hover:bg-slate-800">
+    Ver oferta
+  </button>
+</div>

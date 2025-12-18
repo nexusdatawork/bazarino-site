@@ -1,11 +1,58 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { achadosCategories } from "../data/achadosCategories";
+import { getLatestAchados } from "../data/achados";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const latest = getLatestAchados(12);
 ---
 
-<Layout>
-	<Welcome />
+
+<Layout title="Bazarino | Curadoria inteligente de ofertas">
+  <section class="grid gap-12 lg:grid-cols-2 lg:items-center">
+    <!-- Texto -->
+    <div>
+      <p class="text-sm text-slate-500">
+        Curadoria de ofertas
+      </p>
+
+      <h1 class="mt-2 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+        Achados bons e finos,<br />sem ruído e sem cilada.
+      </h1>
+
+      <p class="mt-4 max-w-xl text-slate-600">
+        O Bazarino seleciona ofertas reais, com critério e bom senso, para você comprar melhor.
+      </p>
+
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <a
+          href="/achados"
+          class="rounded-xl bg-slate-900 px-6 py-3 text-center text-sm font-semibold text-white hover:bg-slate-800"
+        >
+          Ver achados
+        </a>
+
+        <a
+          href="/sobre"
+          class="rounded-xl border border-slate-300 px-6 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
+        >
+          Como funciona
+        </a>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid gap-4 sm:grid-cols-2">
+      {["Tech", "Casa", "Moda", "Games"].map((categoria) => (
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <div class="text-sm text-slate-500">Categoria</div>
+          <div class="mt-1 text-lg font-semibold text-slate-900">
+            {categoria}
+          </div>
+          <div class="mt-2 text-sm text-slate-600">
+            Seleção curada de ofertas confiáveis.
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
 </Layout>

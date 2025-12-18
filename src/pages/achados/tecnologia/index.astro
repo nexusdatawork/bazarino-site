@@ -1,0 +1,22 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ProductCard from "../../../components/ProductCard.astro";
+
+const produtos = [
+  { title: "Smartphone Alpha X", price: "4.999", category: "Tecnologia" },
+  { title: "Notebook Pro 14", price: "7.299", category: "Tecnologia" },
+  { title: "Fone Bluetooth SoundMax", price: "399", category: "Tecnologia" },
+];
+---
+
+<Layout title="Tecnologia | Achados">
+  <h1 class="text-3xl font-semibold text-slate-900">
+    Tecnologia
+  </h1>
+
+  <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {produtos.map((p) => (
+      <ProductCard {...p} />
+    ))}
+  </div>
+</Layout>

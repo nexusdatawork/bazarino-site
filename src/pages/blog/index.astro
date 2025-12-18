@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+const posts: CollectionEntry<"blog">[] = await getCollection("blog");
+---
+
+
+<Layout title="Blog | Bazarino">
+  <h1 class="text-3xl font-semibold text-slate-900">
+    Blog do Bazarino
+  </h1>
+
+  <p class="mt-4 max-w-2xl text-slate-600">
+    Guias, comparativos e dicas para comprar melhor.
+  </p>
+
+  <ul class="mt-10 space-y-6">
+    {posts.map((post) => (
+      <li>
+        <a href={`/blog/${post.slug}`} class="block hover:underline">
+          <h2 class="text-xl font-semibold text-slate-900">
+            {post.data.title}
+          </h2>
+          <p class="mt-1 text-slate-600">
+            {post.data.description}
+          </p>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Layout>

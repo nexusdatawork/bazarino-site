@@ -1,0 +1,37 @@
+---
+import { mainNav } from "../config/navData";
+
+const pathname = Astro.url.pathname;
+
+const isActive = (href: string) =>
+  href === "/"
+    ? pathname === "/"
+    : pathname === href || pathname.startsWith(href + "/");
+---
+
+<header class="border-b">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+    <a href="/" class="font-semibold">Bazarino</a>
+
+    <nav aria-label="Navegação principal">
+      <ul class="flex gap-4">
+        {mainNav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={isActive(item.href) ? "page" : undefined}
+              class:list={[
+                "text-sm",
+                isActive(item.href)
+                  ? "font-semibold underline"
+                  : "text-slate-600 hover:text-slate-900",
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
