@@ -1,0 +1,140 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { achados } from "@/data/achados";
+
+// gera slug “bonito” e estável
+const toSlug = (s: string) =>
+  s
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
+// tenta achar um identificador estável (se existir no seu Achado)
+const getStableKey = (a: any, index: number) => {
+  // ajuste aqui se você tiver `id`, `sku`, `hash`, etc.
+  return a.id ?? a.code ?? a.href ?? index;
+};
+
+// 1) cria paths
+export function getStaticPaths() {
+  return achados.map((a, index) => {
+    const key = getStableKey(a, index);
+    const base = toSlug(String(a.title ?? "achado"));
+    return {
+      params: { slug: `${base}-${key}` },
+    };
+  });
+}
+
+// 2) slug da URL
+const { slug } = Astro.params;
+
+// 3) encontra o item pelo mesmo padrão de slug
+const findItemBySlug = () => {
+  for (let i = 0; i < achados.length; i++) {
+    const a: any = achados[i];
+    const key = getStableKey(a, i);
+    const base = toSlug(String(a.title ?? "achado"));
+    const made = `${base}-${key}`;
+    if (made === slug) return a;
+  }
+  return null;
+};
+
+const item: any = findItemBySlug();
+
+if (!item) {
+  throw new Error(`Achado não encontrado para slug: ${slug}`);
+}
+
+// helpers tipados
+const brl = (n: number | string | null | undefined) =>
+  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(Number(n ?? 0));
+
+const pageTitle = `${item.title} | Achado Bazarino`;
+const pageDesc = item.reason || `Achado em ${item.store || "loja parceira"}.`;
+---
+
+<Layout title={pageTitle} description={pageDesc}>
+  <section class="mx-auto max-w-5xl px-4 pt-8 pb-14">
+    <div class="grid gap-8 md:grid-cols-2 md:items-start">
+      <!-- IMAGEM -->
+      <div class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+        <img
+          src={item.image ?? "/images/placeholders/image-not-found.svg"}
+          alt={item.title}
+          class="w-full h-full object-cover"
+          loading="eager"
+          onerror="this.onerror=null;this.src='/images/placeholders/image-not-found.svg';"
+        />
+      </div>
+
+      <!-- INFO -->
+      <div class="space-y-4">
+        <p class="text-xs uppercase tracking-wide text-slate-500">
+          {item.store ?? "Achado"}
+        </p>
+
+        <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900">
+          {item.title}
+        </h1>
+
+        {!!item.price && (
+          <p class="text-2xl font-bold text-[var(--bazarino-orange)]">
+            {brl(item.price)}
+          </p>
+        )}
+
+        {!!item.oldPrice && (
+          <p class="text-sm text-slate-500 line-through">
+            {brl(item.oldPrice)}
+          </p>
+        )}
+
+        <p class="text-slate-600 leading-relaxed">
+          {item.reason ?? "Selecionado por critério, não por barulho."}
+        </p>
+
+        <div class="pt-4 flex flex-wrap gap-3">
+          <a
+            href={item.href}
+            target="_blank"
+            rel="sponsored noopener noreferrer"
+            class="inline-flex items-center justify-center rounded-xl bg-[var(--bazarino-blue)] px-6 py-3 text-sm font-semibold text-white hover:opacity-90"
+          >
+            Ver oferta
+          </a>
+
+          <a
+            href="/achados"
+            class="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-50"
+          >
+            Voltar
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEMA PRODUCT -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": item.title,
+      "image": item.image ? [item.image] : undefined,
+      "description": pageDesc,
+      "brand": item.store ? { "@type": "Brand", "name": item.store } : undefined,
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "BRL",
+        "price": String(item.price ?? ""),
+        "url": item.href,
+        "availability": "https://schema.org/InStock"
+      }
+    })}
+  ></script>
+</Layout>

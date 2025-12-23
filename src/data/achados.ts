@@ -1,62 +1,74 @@
+// src/data/achados.ts
+import legacy from "./achados-editions.json";
+import type { AchadosEdition } from "./achadosEditions";
+
+type JsonModule = { default: unknown };
+
+// NOVO: src/data/achados/*.json (um arquivo por dia/edição)
+const dailyModules = import.meta.glob<unknown>("./achados/*.json", { eager: true });
+
+function asEditions(value: unknown): AchadosEdition[] {
+  if (!value) return [];
+  const v = (value as JsonModule).default ?? value;
+  if (Array.isArray(v)) return v as AchadosEdition[];
+  return [v as AchadosEdition];
+}
+
+const editions: AchadosEdition[] = [
+  ...asEditions(legacy),
+  ...Object.values(dailyModules).flatMap((m) => asEditions(m)),
+];
+
 export type Achado = {
   id: string;
   title: string;
-  price: number;
+  category: string;
   store: string;
+  price: number;
+  oldPrice?: number | null;
+  image?: string | null;
   href: string;
-  category: string;   // slug da categoria
-  createdAt: string;  // YYYY-MM-DD
-  highlight?: boolean;
+  score?: number | null;
+  date?: string | null;
+  reason?: string | null;
 };
 
-export const achadosMock: Achado[] = [
-  {
-    id: "2025-12-18-eletronicos-01",
-    title: "Headset Bluetooth XYZ",
-    price: 199.9,
-    store: "Loja Exemplo",
-    href: "#",
-    category: "eletronicos",
-    createdAt: "2025-12-18",
-    highlight: true,
-  },
-  {
-    id: "2025-12-18-casa-01",
-    title: "Air Fryer Compacta 4L",
-    price: 299.9,
-    store: "Loja Exemplo",
-    href: "#",
-    category: "casa-e-cozinha",
-    createdAt: "2025-12-18",
-  },
-  {
-    id: "2025-12-17-moda-01",
-    title: "Camiseta básica premium",
-    price: 59.9,
-    store: "Loja Exemplo",
-    href: "#",
-    category: "moda",
-    createdAt: "2025-12-17",
-  },
-  {
-    id: "2025-12-17-games-01",
-    title: "Gift Card 100 (exemplo)",
-    price: 89.9,
-    store: "Loja Exemplo",
-    href: "#",
-    category: "games",
-    createdAt: "2025-12-17",
-  },
-];
+function extractItems(): Achado[] {
+  const result: Achado[] = [];
 
-export function getLatestAchados(limit = 12) {
-  return [...achadosMock]
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+  for (const edition of editions) {
+    const date = edition.date;
+
+    for (const item of edition.items ?? []) {
+      const it: any = item;
+      result.push({
+        id: it.id,
+        title: it.name,
+        category: it.category,
+        store: it.vendor,
+        price: it.price,
+        oldPrice: it.oldPrice ?? null,
+        image: it.image ?? null,
+        href: it.affiliateUrl,
+        score: it.score ?? null,
+        date,
+        reason: it.reason ?? null,
+      });
+    }
+  }
+
+  return result;
+}
+
+export const achados: Achado[] = extractItems();
+
+export function getLatestAchados(limit = 6): Achado[] {
+  return [...achados]
+    .sort((a, b) => (b.date ? new Date(b.date).getTime() : 0) - (a.date ? new Date(a.date).getTime() : 0))
     .slice(0, limit);
 }
 
-export function getAchadosByCategory(category: string) {
-  return achadosMock
-    .filter((a) => a.category === category)
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+export function getAchadosByCategory(category: string, limit?: number): Achado[] {
+  const filtered = achados.filter((a) => a.category === category);
+  return typeof limit === "number" ? filtered.slice(0, limit) : filtered;
 }

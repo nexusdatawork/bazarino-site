@@ -1,0 +1,97 @@
+{
+  "date": "2025-12-17",
+  "type": "daily",
+  "title": "Achados do dia 17/12",
+  "kicker": "Curadoria diária",
+  "intro": "Os achados com melhor custo-benefício do dia, sem ruído.",
+  "items": [
+    {
+      "id": "sample-casa-e-cozinha-1",
+      "name": "Achado 1 em Casa-E-Cozinha",
+      "category": "casa-e-cozinha",
+      "vendor": "Magalu",
+      "price": 878.45,
+      "oldPrice": 295.45,
+      "image": "https://picsum.photos/seed/casa-e-cozinha-1/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 92
+    },
+    {
+      "id": "sample-games-2",
+      "name": "Achado 2 em Games",
+      "category": "games",
+      "vendor": "Kabum",
+      "price": 301.07,
+      "oldPrice": 914.35,
+      "image": "https://picsum.photos/seed/games-2/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 83
+    },
+    {
+      "id": "sample-casa-e-cozinha-3",
+      "name": "Achado 3 em Casa-E-Cozinha",
+      "category": "casa-e-cozinha",
+      "vendor": "Amazon",
+      "price": 622.72,
+      "oldPrice": 603.31,
+      "image": "https://picsum.photos/seed/casa-e-cozinha-3/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 82
+    },
+    {
+      "id": "sample-games-4",
+      "name": "Achado 4 em Games",
+      "category": "games",
+      "vendor": "Amazon",
+      "price": 300.45,
+      "oldPrice": 579.52,
+      "image": "https://picsum.photos/seed/games-4/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 72
+    },
+    {
+      "id": "sample-games-5",
+      "name": "Achado 5 em Games",
+      "category": "games",
+      "vendor": "Kabum",
+      "price": 783.06,
+      "oldPrice": 742.34,
+      "image": "https://picsum.photos/seed/games-5/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 76
+    },
+    {
+      "id": "sample-games-6",
+      "name": "Achado 6 em Games",
+      "category": "games",
+      "vendor": "Kabum",
+      "price": 670.19,
+      "oldPrice": 384.69,
+      "image": "https://picsum.photos/seed/games-6/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 91
+    },
+    {
+      "id": "sample-casa-e-cozinha-7",
+      "name": "Achado 7 em Casa-E-Cozinha",
+      "category": "casa-e-cozinha",
+      "vendor": "Magalu",
+      "price": 69.89,
+      "oldPrice": 887.4,
+      "image": "https://picsum.photos/seed/casa-e-cozinha-7/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 81
+    },
+    {
+      "id": "sample-games-8",
+      "name": "Achado 8 em Games",
+      "category": "games",
+      "vendor": "Kabum",
+      "price": 829.83,
+      "oldPrice": 750.11,
+      "image": "https://picsum.photos/seed/games-8/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 85
+    }
+  ]
+}

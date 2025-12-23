@@ -1,10 +1,181 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout title="Sobre">
-  <h1 class="text-2xl font-semibold">Sobre</h1>
-  <p class="mt-4 text-slate-600">
-    Página em construção.
-  </p>
+  <!-- HERO (imagem + heading) -->
+  <section class="mx-auto max-w-6xl px-4 pt-10 pb-8">
+    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-8 md:p-10">
+      <div class="grid gap-8 md:grid-cols-[1.2fr,0.8fr] md:items-center">
+        <!-- Texto do hero -->
+        <div class="space-y-3">
+          <p class="text-xs uppercase tracking-wide text-slate-500">Sobre</p>
+
+          <h1 class="text-3xl font-semibold text-slate-900">
+            Curadoria de ofertas com critério, contexto e transparência.
+          </h1>
+
+          <p class="max-w-2xl text-slate-600 leading-relaxed">
+            O Bazarino é um projeto editorial de achados: a gente filtra o que parece bom,
+            checa sinais de confiabilidade e entrega uma lista clara, sem ruído e sem cilada.
+            Você economiza tempo, evita “promoção fake” e encontra boas compras com mais segurança.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTEÚDO PRINCIPAL (card editorial + blocos) -->
+  <section class="mx-auto max-w-6xl px-4 pb-14">
+    <div class="grid gap-10 md:grid-cols-[1.25fr,0.75fr] md:items-start">
+
+      <!-- COLUNA ESQUERDA: Card editorial principal -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-10 shadow-sm space-y-10">
+        <!-- O que é -->
+        <section class="space-y-3">
+          <h2 class="text-xl font-semibold text-slate-900">O que é o Bazarino</h2>
+          <p class="text-slate-600 leading-relaxed">
+            Somos uma curadoria que organiza ofertas em edições diárias e categorias.
+            Aqui você encontra o “top do dia” com contexto: preço, fornecedor e por que aquele item entrou na lista.
+            O objetivo é simples: entregar achados com clareza, sem exageros e sem empurrar qualquer coisa.
+          </p>
+        </section>
+
+        <!-- Como funciona -->
+        <section class="space-y-4">
+          <h2 class="text-xl font-semibold text-slate-900">Como funciona</h2>
+
+          <ol class="grid gap-4 md:grid-cols-2">
+            <li class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+              <p class="text-sm font-semibold text-slate-900">1) Garimpo e triagem</p>
+              <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                Monitoramos ofertas e tendências por categoria e cortamos o que é “ruído”:
+                preço sem sentido, produto duvidoso ou histórico estranho.
+              </p>
+            </li>
+
+            <li class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+              <p class="text-sm font-semibold text-slate-900">2) Contexto rápido</p>
+              <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                A oferta é apresentada com informações diretas: fornecedor, faixa de preço e comparativo
+                quando aplicável, para você decidir rápido.
+              </p>
+            </li>
+
+            <li class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+              <p class="text-sm font-semibold text-slate-900">3) Edição do dia</p>
+              <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                Publicamos uma edição diária com os destaques e o Top 10. Também geramos páginas por categoria
+                e histórico para pesquisa.
+              </p>
+            </li>
+
+            <li class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+              <p class="text-sm font-semibold text-slate-900">4) Atualização contínua</p>
+              <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                Preço e disponibilidade mudam. Sempre que possível, atualizamos o conteúdo e mantemos o histórico
+                para análise e SEO.
+              </p>
+            </li>
+          </ol>
+        </section>
+
+        <!-- Transparência e afiliados -->
+        <section class="space-y-3">
+          <h2 class="text-xl font-semibold text-slate-900">Transparência</h2>
+          <p class="text-slate-600 leading-relaxed">
+            O Bazarino pode usar links de afiliado. Isso significa que, se você comprar por um link nosso,
+            podemos receber uma comissão sem custo extra para você. Isso ajuda a manter o projeto no ar,
+            melhorar a curadoria e automatizar o pipeline de conteúdo.
+          </p>
+          <p class="text-slate-600 leading-relaxed">
+            Ainda assim, a regra é: <span class="font-medium text-slate-900">não entra qualquer coisa</span>.
+            A curadoria precisa fazer sentido para o leitor. Confiança é mais valiosa que clique.
+          </p>
+        </section>
+
+        <!-- Mini FAQ (SEO + objeções) -->
+        <section class="space-y-4">
+          <h2 class="text-xl font-semibold text-slate-900">Perguntas rápidas</h2>
+
+          <div class="space-y-3">
+            <details class="rounded-xl border border-slate-200 p-5">
+              <summary class="cursor-pointer text-sm font-semibold text-slate-900">
+                Vocês garantem preço ou estoque?
+              </summary>
+              <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+                Não. Preço e disponibilidade mudam rápido. A gente publica o melhor cenário que encontrou no momento,
+                mas a compra final sempre depende do lojista.
+              </p>
+            </details>
+
+            <details class="rounded-xl border border-slate-200 p-5">
+              <summary class="cursor-pointer text-sm font-semibold text-slate-900">
+                O Bazarino vende produtos?
+              </summary>
+              <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+                Não. O Bazarino é curadoria editorial. Indicamos e direcionamos para o parceiro/lojista.
+              </p>
+            </details>
+
+            <details class="rounded-xl border border-slate-200 p-5">
+              <summary class="cursor-pointer text-sm font-semibold text-slate-900">
+                Como vocês escolhem os itens?
+              </summary>
+              <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+                Usamos critérios de contexto e sinais de confiabilidade: histórico de preço (quando disponível),
+                reputação do vendedor/plataforma, clareza da oferta e relevância do produto.
+              </p>
+            </details>
+          </div>
+        </section>
+      </div>
+
+      <!-- COLUNA DIREITA: Bloco de valor + CTA -->
+      <aside class="space-y-6">
+        <div class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm space-y-4">
+          <p class="text-sm font-semibold text-slate-900">O valor do Bazarino</p>
+
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex gap-2">
+              <span class="text-slate-900">•</span>
+              Economiza tempo: você não precisa garimpar em 10 sites.
+            </li>
+            <li class="flex gap-2">
+              <span class="text-slate-900">•</span>
+              Mais confiança: curadoria evita ciladas e “promo fake”.
+            </li>
+            <li class="flex gap-2">
+              <span class="text-slate-900">•</span>
+              Conteúdo editorial: contexto ajuda a decidir com calma.
+            </li>
+            <li class="flex gap-2">
+              <span class="text-slate-900">•</span>
+              Automação: edições frequentes, sem perder consistência.
+            </li>
+          </ul>
+
+          <div class="pt-4 border-t border-slate-200">
+            <a
+              href="/contato"
+              class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 transition-colors"
+            >
+              Falar com a gente
+            </a>
+            <p class="mt-2 text-xs text-slate-500">
+              Sugestões, parcerias e feedbacks são bem-vindos.
+            </p>
+          </div>
+        </div>
+
+        <!-- Assinatura simples -->
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
+          <p class="text-sm font-semibold text-slate-900">O Bazarino.</p>
+          <p class="mt-2 text-xs text-slate-500">
+            Achado fino é achado Bazarino.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
 </Layout>

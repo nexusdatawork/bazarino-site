@@ -1,73 +1,134 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { achadosCategories } from "../../data/achadosCategories";
-import { getLatestAchados } from "../../data/achados";
+import { listDailyEditions, listCategoriesByFrequency } from "@/lib/achadosSource";
+import { titleFromSlug } from "@/lib/slug";
 
-const latest = getLatestAchados(12);
+const daily = listDailyEditions();
+const latest = daily[0];
+
+// ✅ Exibe só a última semana no hub principal
+const WEEK_DAYS = 7;
+const week = daily.slice(0, WEEK_DAYS);
+const older = daily.slice(WEEK_DAYS);
+
+// ✅ Arquivo mensal (agrupa as edições antigas por AAAA-MM)
+const monthMap = new Map<string, number>(); // key=YYYY-MM, count
+for (const e of older) {
+  const [y, m] = e.date.split("-");
+  if (!y || !m) continue;
+  const key = `${y}-${m}`;
+  monthMap.set(key, (monthMap.get(key) ?? 0) + 1);
+}
+const months = [...monthMap.entries()]
+  .map(([key, count]) => ({ key, count }))
+  .sort((a, b) => (a.key < b.key ? 1 : -1)); // desc
+
+const cats = listCategoriesByFrequency(12);
 ---
 
-<Layout title="Achados">
+<Layout title="Achados • O Bazarino">
   <section class="space-y-10">
-    <header>
+    <header class="space-y-3">
       <h1 class="text-2xl font-semibold">Achados</h1>
-      <p class="mt-4 text-slate-600 max-w-3xl">
-        Novidades selecionadas diariamente. Sem ruído, sem cilada.
+      <p class="max-w-3xl text-slate-700">
+        Curadoria diária de ofertas com score de custo-benefício. Aqui você encontra a edição do dia, a última semana e o
+        arquivo mensal (histórico). Sem ruído, só utilidade. 🙂
       </p>
     </header>
 
-    <!-- Últimos achados -->
-    <section class="space-y-4">
-      <div class="flex items-end justify-between gap-4">
-        <h2 class="text-lg font-semibold">Últimos achados</h2>
-        <span class="text-sm text-slate-500">Mock diário</span>
-      </div>
+    {/* Última edição (acima da dobra) */}
+    {latest ? (
+      <section class="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-3">
+        <p class="text-sm text-slate-600">Edição mais recente • {latest.date}</p>
+        <h2 class="text-xl font-semibold">{latest.title}</h2>
+        {latest.intro ? <p class="max-w-3xl text-slate-700">{latest.intro}</p> : null}
+        {(() => {
+          const [ano, mes, dia] = (latest?.date ?? "").split("-");
+          return ano && mes && dia ? (
+            <a
+              class="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white hover:bg-slate-800 transition"
+              href={`/achados/${ano}/${mes}/${dia}`}
+            >
+              Ver Top 10 de hoje
+            </a>
+          ) : null;
+        })()}
+      </section>
+    ) : (
+      <p class="text-slate-600">Ainda não há edições publicadas.</p>
+    )}
 
-      {latest.length === 0 ? (
-        <p class="text-slate-600">Ainda não há achados publicados.</p>
-      ) : (
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {latest.map((a) => (
-            <article class="rounded-lg border border-slate-200 p-4 hover:border-slate-300">
-              <div class="flex items-start justify-between gap-3">
-                <h3 class="font-semibold leading-snug">{a.title}</h3>
-                <span class="text-xs text-slate-500 whitespace-nowrap">
-                  {new Date(a.createdAt).toLocaleDateString("pt-BR")}
-                </span>
-              </div>
+    {/* Últimos 7 dias */}
+    {week.length ? (
+      <section class="space-y-4">
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="text-lg font-semibold">Últimos 7 dias</h2>
+          <span class="text-xs text-slate-500">Para não virar infinita: o resto vai para o arquivo mensal.</span>
+        </div>
 
-              <p class="mt-2 text-sm text-slate-600">{a.store}</p>
-
-              <div class="mt-3 flex items-center justify-between">
-                <p class="font-semibold">R$ {a.price.toFixed(2)}</p>
-                <a class="text-sm underline" href={`/achados/${a.category}`}>
-                  Ver categoria
+        <div class="rounded-xl border border-slate-200 overflow-hidden bg-white">
+          <div class="divide-y divide-slate-200">
+            {week.map((e) => {
+              const [ano, mes, dia] = e.date.split("-");
+              return (
+                <a class="block px-4 py-4 hover:bg-slate-50 transition" href={`/achados/${ano}/${mes}/${dia}`}>
+                  <div class="flex items-center justify-between gap-4">
+                    <div class="min-w-0">
+                      <p class="font-semibold text-slate-900 truncate">{e.title}</p>
+                      <p class="text-sm text-slate-600">{e.date}</p>
+                    </div>
+                    <span class="text-sm underline">Abrir</span>
+                  </div>
                 </a>
-              </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    ) : null}
 
-              <a class="mt-3 inline-block text-sm underline" href={a.href} target="_blank" rel="noreferrer">
-                Ver oferta
+    {/* Arquivo mensal */}
+    {months.length ? (
+      <section class="space-y-4">
+        <h2 class="text-lg font-semibold">Arquivo mensal</h2>
+        <p class="text-sm text-slate-600 max-w-3xl">
+          Edições mais antigas ficam organizadas por mês (perfeito para histórico e SEO limpo).
+        </p>
+
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {months.map(({ key, count }) => {
+            const [ano, mes] = key.split("-");
+            const label = new Date(`${key}-01T00:00:00`).toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+            return (
+              <a
+                class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+                href={`/achados/arquivo/${ano}/${mes}`}
+              >
+                <p class="text-sm text-slate-600">Arquivo</p>
+                <p class="mt-1 text-base font-semibold text-slate-900 capitalize">{label}</p>
+                <p class="mt-2 text-xs text-slate-500">{count} edições</p>
               </a>
-            </article>
+            );
+          })}
+        </div>
+      </section>
+    ) : null}
+
+    {/* Explorar por categoria */}
+    {cats.length ? (
+      <section class="space-y-4">
+        <h2 class="text-lg font-semibold">Explorar por categoria</h2>
+        <div class="flex flex-wrap gap-2">
+          {cats.map((c) => (
+            <a
+              class="rounded-full border border-slate-200 bg-white px-3 py-1 text-sm hover:bg-slate-50 transition"
+              href={`/achados/categoria/${c.slug}`}
+            >
+              {titleFromSlug(c.slug)} <span class="text-slate-400">({c.count})</span>
+            </a>
           ))}
         </div>
-      )}
-    </section>
-
-    <!-- Categorias -->
-    <section class="space-y-4">
-      <h2 class="text-lg font-semibold">Explorar por categoria</h2>
-
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {achadosCategories.map((c) => (
-          <a
-            href={`/achados/${c.slug}`}
-            class="rounded-lg border border-slate-200 p-4 hover:border-slate-300"
-          >
-            <p class="font-semibold">{c.title}</p>
-            <p class="mt-2 text-sm text-slate-600">{c.description}</p>
-          </a>
-        ))}
-      </div>
-    </section>
+      </section>
+    ) : null}
   </section>
 </Layout>

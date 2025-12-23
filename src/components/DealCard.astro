@@ -1,0 +1,146 @@
+---
+type DealCardProps = {
+  title: string;
+  store?: string;
+  price: number | string;
+  oldPrice?: number | string | null;
+  image?: string | null;
+  href: string;
+  tag?: string;
+  reason?: string;
+};
+
+const {
+  title,
+  store,
+  price,
+  oldPrice,
+  image,
+  href,
+  tag,
+  reason,
+} = Astro.props as DealCardProps;
+
+const currentPrice = Number(price ?? 0);
+
+const previousPrice =
+  oldPrice === undefined || oldPrice === null || oldPrice === ""
+    ? null
+    : Number(oldPrice);
+
+const discountPercent =
+  previousPrice && previousPrice > currentPrice
+    ? Math.round(((previousPrice - currentPrice) / previousPrice) * 100)
+    : null;
+
+const savings =
+  previousPrice && previousPrice > currentPrice
+    ? previousPrice - currentPrice
+    : null;
+
+function brl(n: number | string) {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(Number(n ?? 0));
+}
+
+// Normaliza URLs/caminhos de imagem
+function normalizeImg(src?: string | null) {
+  if (!src || typeof src !== "string") return null;
+  const s = src.trim();
+  if (!s) return null;
+
+  // URL externa
+  if (s.startsWith("http://") || s.startsWith("https://")) return s;
+
+  // Caminho local em public
+  if (s.startsWith("/")) return s;
+  if (s.startsWith("./")) return "/" + s.slice(2);
+
+  // Ex: "images/achados/x.jpg" -> "/images/achados/x.jpg"
+  return "/" + s;
+}
+
+const imgSrc = normalizeImg(image) ?? "/images/placeholders/image-not-found.svg";
+const safeReason =
+  reason ?? "Curadoria Bazarino: selecionado por custo-benefício e confiabilidade.";
+
+const isExternal = href?.startsWith("http");
+---
+
+<article class="group bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-[var(--bazarino-orange)] transition-all hover:shadow-xl hover:shadow-[var(--bazarino-orange)]/10">
+  <!-- Image -->
+  <div class="relative aspect-square overflow-hidden bg-slate-100">
+    <img
+      src={imgSrc}
+      alt={title}
+      loading="lazy"
+      decoding="async"
+      width="640"
+      height="480"
+      class="h-full w-full object-cover"
+      onerror="this.onerror=null;this.src='/images/placeholders/image-not-found.svg';"
+    />
+
+
+    {discountPercent ? (
+      <div class="absolute top-3 left-3 bg-[var(--bazarino-orange)] text-white px-3 py-1.5 rounded-lg shadow-lg text-sm font-semibold">
+        -{discountPercent}%
+      </div>
+    ) : null}
+
+    {tag ? (
+      <div class="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-slate-900 px-3 py-1.5 rounded-lg text-xs font-semibold">
+        {tag}
+      </div>
+    ) : null}
+  </div>
+
+  <!-- Content -->
+  <div class="p-5">
+    {store ? (
+      <p class="text-xs uppercase tracking-wide text-slate-500">{store}</p>
+    ) : null}
+
+    <h3 class="mt-1 mb-3 line-clamp-2 min-h-[3rem] font-semibold text-slate-900">
+      {title}
+    </h3>
+
+    <!-- Prices -->
+    <div class="mb-4">
+      <div class="flex items-baseline gap-2">
+        <span class="text-3xl font-bold text-[var(--bazarino-orange)]">
+          {brl(currentPrice)}
+        </span>
+      </div>
+
+      {previousPrice ? (
+        <div class="mt-1 flex items-center gap-2">
+          <span class="text-sm text-slate-500 line-through">{brl(previousPrice)}</span>
+          {savings ? (
+            <span class="text-sm text-green-600">Economize {brl(savings)}</span>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+
+    <!-- Reason -->
+    <div class="bg-slate-50 rounded-lg p-3 mb-4">
+      <p class="text-sm text-slate-700">
+        <span class="mr-2" aria-hidden="true">👁️</span>
+        <span class="italic">&quot;{safeReason}&quot;</span>
+      </p>
+    </div>
+
+    <!-- CTA -->
+    <a
+      class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--bazarino-blue)] hover:bg-[var(--bazarino-blue-dark)] text-white py-3 font-semibold transition"
+      href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "sponsored noopener noreferrer" : undefined}
+    >
+      Ver Oferta <span aria-hidden="true">➡️</span>
+    </a>
+  </div>
+</article>

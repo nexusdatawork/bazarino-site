@@ -1,0 +1,98 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import EditionPage from "../../../components/EditionPage.astro";
+import { listAllCategories, listCategoryEditions } from "@/lib/achadosSource";
+import { titleFromSlug } from "@/lib/slug";
+
+export function getStaticPaths() {
+  return listAllCategories()
+    .filter((c) => typeof c === "string" && c.trim().length > 0)
+    .map((categoria) => ({
+      params: { categoria },
+    }));
+}
+
+
+const { categoria } = Astro.params;
+const editions = listCategoryEditions(categoria);
+
+// Monta uma “edição virtual” pra renderizar com o mesmo template (lista), mantendo padrão de layout
+const title = `Histórico: ${titleFromSlug(categoria)}`;
+
+const virtualEdition = {
+  date: editions[0]?.date ?? "—",
+  type: "category",
+  category: categoria,
+  title,
+  kicker: "Explorar por categoria • histórico de edições 📚",
+  intro:
+    `Aqui estão as edições já publicadas para ${titleFromSlug(categoria)}. ` +
+    "Quando sair uma edição nova, ela aparece automaticamente aqui.",
+  outro:
+    "Dica: volte sempre. Quando o radar achar algo realmente bom nessa categoria, ele entra no histórico.",
+  methodologyTitle: "O que você encontra aqui",
+  methodology: [
+    "Edições por data (quando houver publicação).",
+    "Links diretos para o Top da categoria em cada dia.",
+    "Curadoria com score de custo-benefício."
+  ],
+  ctaText: "Quer sugerir uma categoria nova? Me manda por aqui 👇",
+  ctaLink: "/contato",
+  items: (editions[0]?.items ? editions[0].items : [])
+};
+---
+
+
+<Layout title={title}>
+  {editions.length === 0 ? (
+    <section class="space-y-4">
+      <h1 class="text-2xl font-semibold">{title}</h1>
+      <p class="text-slate-600">
+        Ainda não temos edições para essa categoria.
+      </p>
+      <a class="underline" href="/achados">Voltar para Achados</a>
+    </section>
+  ) : (
+    <section class="space-y-8">
+      <header class="space-y-2">
+        <p class="text-sm text-slate-600">Total de edições: {editions.length}</p>
+        <h1 class="text-2xl font-semibold">{title}</h1>
+        <p class="max-w-3xl text-slate-700">
+          Clique em uma data para ver o Top da categoria naquele dia.
+        </p>
+      </header>
+
+      <div class="rounded-xl border border-slate-200 overflow-hidden">
+        <div class="bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-slate-600">
+          Edições
+        </div>
+        <div class="divide-y divide-slate-200">
+          {editions.map((e) => {
+            const [ano, mes, dia] = e.date.split("-");
+            return (
+              <a
+                class="block px-4 py-4 hover:bg-slate-50 transition"
+                href={`/achados/${ano}/${mes}/${dia}/${categoria}`}
+              >
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="font-semibold text-slate-900">{e.title}</p>
+                    <p class="text-sm text-slate-600">{e.date}</p>
+                  </div>
+                  <span class="text-sm underline">Abrir</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* opcional: mostra a edição mais recente abaixo, usando o layout padrão */}
+      <section class="space-y-4">
+        <h2 class="text-lg font-semibold">Última edição da categoria</h2>
+        <EditionPage edition={editions[0]} showHighlights={false} />
+      </section>
+    </section>
+  )}
+</Layout>
+

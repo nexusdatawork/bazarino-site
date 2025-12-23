@@ -1,0 +1,25 @@
+---
+import Layout from "../../../../../layouts/Layout.astro";
+import EditionPage from "../../../../../components/EditionPage.astro";
+import { getDailyEditionByDate, listAvailableDates } from "@/lib/achadosSource";
+
+export function getStaticPaths() {
+  return listAvailableDates().map((date) => {
+    const [ano, mes, dia] = date.split("-");
+    return { params: { ano, mes, dia } };
+  });
+}
+
+const { ano, mes, dia } = Astro.params;
+const date = `${ano}-${mes}-${dia}`;
+
+const edition = getDailyEditionByDate(date);
+---
+
+<Layout title={edition?.title ?? "Achados do dia"}>
+  {!edition ? (
+    <p class="text-slate-600">Edição não encontrada.</p>
+  ) : (
+    <EditionPage edition={edition} showHighlights={true} />
+  )}
+</Layout>

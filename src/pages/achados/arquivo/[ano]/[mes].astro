@@ -1,0 +1,73 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+import { listDailyEditions } from "@/lib/achadosSource";
+
+export function getStaticPaths() {
+  const daily = listDailyEditions();
+
+  // A página /achados mostra só os 7 dias mais recentes.
+  // Tudo o que for mais antigo vai para o arquivo mensal.
+  const WEEK_DAYS = 7;
+  const older = daily.slice(WEEK_DAYS);
+
+  const set = new Set<string>(); // YYYY-MM
+  for (const e of older) {
+    const [ano, mes] = e.date.split("-");
+    if (ano && mes) set.add(`${ano}-${mes}`);
+  }
+
+  return [...set].map((key) => {
+    const [ano, mes] = key.split("-");
+    return { params: { ano, mes } };
+  });
+}
+
+const { ano, mes } = Astro.params;
+
+// Pega todas as edições do mês
+const daily = listDailyEditions();
+const WEEK_DAYS = 7;
+const older = daily.slice(WEEK_DAYS);
+
+const monthEditions = older.filter((e) => e.date.startsWith(`${ano}-${mes}`));
+monthEditions.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+const label = new Date(`${ano}-${mes}-01T00:00:00`).toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+const title = `Arquivo: ${label} | Achados`;
+---
+
+<Layout title={title}>
+  <section class="space-y-6">
+    <header class="space-y-2">
+      <p class="text-sm text-slate-600">Arquivo mensal</p>
+      <h1 class="text-2xl font-semibold capitalize">{label}</h1>
+      <p class="text-slate-700">
+        Aqui ficam as edições mais antigas (fora da última semana). Total: <strong>{monthEditions.length}</strong>.
+      </p>
+      <a href="/achados" class="text-sm font-semibold text-[var(--bazarino-blue)] hover:underline">← Voltar para Achados</a>
+    </header>
+
+    {monthEditions.length ? (
+      <div class="rounded-xl border border-slate-200 overflow-hidden bg-white">
+        <div class="divide-y divide-slate-200">
+          {monthEditions.map((e) => {
+            const [y, m, d] = e.date.split("-");
+            return (
+              <a class="block px-4 py-4 hover:bg-slate-50 transition" href={`/achados/${y}/${m}/${d}`}>
+                <div class="flex items-center justify-between gap-4">
+                  <div class="min-w-0">
+                    <p class="font-semibold text-slate-900 truncate">{e.title}</p>
+                    <p class="text-sm text-slate-600">{e.date}</p>
+                  </div>
+                  <span class="text-sm underline">Abrir</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    ) : (
+      <p class="text-slate-600">Nada encontrado para este mês.</p>
+    )}
+  </section>
+</Layout>

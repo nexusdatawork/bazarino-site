@@ -1,0 +1,93 @@
+---
+import AchadosList from "./AchadosList.astro";
+import type { AchadosEdition } from "@/data/achadosEditions";
+
+type Props = {
+  edition: AchadosEdition;
+  showHighlights?: boolean; // Destaques (Top 3) em cards (somente daily)
+};
+
+const { edition, showHighlights = false } = Astro.props;
+
+/**
+ * Regras editoriais:
+ * - Top 10: sempre os 10 melhores itens (por score) para consistência.
+ * - Destaques: Top 3 do Top 10, apenas na edição diária geral.
+ */
+const sorted = [...edition.items].sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+const top10 = sorted.slice(0, 10);
+const highlights = showHighlights ? top10.slice(0, 3) : [];
+
+// Normaliza `methodology` para sempre virar uma lista (string[])
+// Aceita: array, string única ou undefined.
+const methodologyRaw = (edition as any).methodology;
+
+const methodologyList: string[] = Array.isArray(methodologyRaw)
+  ? methodologyRaw
+  : typeof methodologyRaw === "string"
+  ? [methodologyRaw]
+  : [];
+
+---
+
+
+<section class="space-y-10">
+  {/* Cabeçalho editorial */}
+  <header class="space-y-3">
+    {edition.kicker ? (
+      <p class="text-sm text-slate-600">{edition.kicker}</p>
+    ) : null}
+
+    <h1 class="text-2xl font-semibold">{edition.title}</h1>
+
+    {edition.intro ? (
+      <p class="max-w-3xl text-slate-700 leading-relaxed">{edition.intro}</p>
+    ) : null}
+  </header>
+
+  {/* Destaques (somente no diário geral) */}
+  {showHighlights && highlights.length > 0 ? (
+    <section class="space-y-4">
+      <h2 class="text-lg font-semibold">Destaques</h2>
+      <AchadosList items={highlights} variant="grid" />
+    </section>
+  ) : null}
+
+  {/* Top 10 (lista) */}
+  <section class="space-y-4">
+    <h2 class="text-lg font-semibold">Top 10</h2>
+    <AchadosList items={top10} variant="list" />
+  </section>
+
+  {/* Texto final */}
+  {edition.outro ? (
+    <section class="space-y-3">
+      <p class="max-w-3xl text-slate-700 leading-relaxed">{edition.outro}</p>
+    </section>
+  ) : null}
+
+  {methodologyList.length ? (
+    <section class="space-y-3">
+      <h3 class="text-base font-semibold">
+        {edition.methodologyTitle ?? "Metodologia"}
+      </h3>
+      <ul class="list-disc pl-5 text-slate-700 space-y-1">
+        {methodologyList.map((m) => (
+          <li>{m}</li>
+        ))}
+      </ul>
+    </section>
+  ) : null}
+
+
+  {/* CTA */}
+  {edition.ctaText ? (
+    <section class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+      <p class="font-semibold text-slate-900">{edition.ctaText}</p>
+      <a class="mt-2 inline-block underline" href={edition.ctaLink ?? "/contato"}>
+        Ir
+      </a>
+    </section>
+  ) : null}
+</section>
+

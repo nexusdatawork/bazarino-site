@@ -1,0 +1,159 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+type BlogEntry = {
+  slug: string;
+  body: string;
+  data: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    tags: string[];
+    author: string;
+    draft: boolean;
+    updatedDate?: Date;
+    image?: string;
+    canonical?: string;
+  };
+};
+
+const PAGE_SIZE = 12;
+
+const all = (await getCollection("blog"))
+  .filter((p) => !p.data?.draft)
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()) as unknown as BlogEntry[];
+
+const totalPages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+
+export function getStaticPaths() {
+  // Página 1 é /blog (index). Aqui geramos da 2 em diante.
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1).filter((p) => p > 1);
+  return pages.map((page) => ({ params: { page: String(page) } }));
+}
+
+const page = Number(Astro.params.page ?? "2");
+const safePage = Number.isFinite(page) ? Math.min(Math.max(page, 2), totalPages) : 2;
+
+const start = (safePage - 1) * PAGE_SIZE;
+const slice = all.slice(start, start + PAGE_SIZE);
+
+function formatDate(date: Date | string | number | null | undefined): string {
+  if (!date) return "";
+  return new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", year: "numeric" }).format(new Date(date));
+}
+
+function coverFor(post: BlogEntry, w = 900, h = 560): string {
+  return post.data.image ?? `https://picsum.photos/seed/${encodeURIComponent(post.slug)}/${w}/${h}`;
+}
+function onErrorToPicsum(seed: string, w = 900, h = 560) {
+  const url = `https://picsum.photos/seed/${encodeURIComponent(seed)}/${w}/${h}`;
+  return `this.onerror=null;this.src='${url}';`;
+}
+
+const prevHref = safePage === 2 ? "/blog" : `/blog/page/${safePage - 1}`;
+const nextHref = safePage < totalPages ? `/blog/page/${safePage + 1}` : null;
+
+// numeração enxuta (sempre mostra 1, e janela ao redor da página atual)
+const windowSize = 5;
+const startPage = Math.max(2, safePage - Math.floor(windowSize / 2));
+const endPage = Math.min(totalPages, startPage + windowSize - 1);
+const pages = Array.from({ length: Math.max(0, endPage - startPage + 1) }, (_, i) => startPage + i);
+---
+
+<Layout title={`Blog | Página ${safePage} | O Bazarino`}>
+  <section class="mx-auto max-w-6xl px-4 py-10">
+    <div class="mb-6 flex items-end justify-between gap-4">
+      <div>
+        <h1 class="text-2xl font-semibold text-slate-900">Blog</h1>
+        <p class="mt-1 text-sm text-slate-600">Página {safePage} de {totalPages}.</p>
+      </div>
+
+      <a href="/blog" class="text-sm font-semibold text-blue-800 hover:underline">← Voltar para o início do Blog</a>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-3">
+      {slice.map((post) => (
+        <article class="group overflow-hidden rounded-3xl border bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg">
+          <a href={`/blog/${post.slug}`} class="block">
+            <div class="relative">
+              <img
+                src={coverFor(post)}
+                onerror={onErrorToPicsum(post.slug)}
+                alt={post.data.title}
+                loading="lazy"
+                decoding="async"
+                class="h-44 w-full object-cover"
+              />
+              <span class="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-slate-900">
+                {post.data.tags?.[0] ?? "Guia"}
+              </span>
+            </div>
+
+            <div class="p-5">
+              <div class="text-xs text-slate-500">{formatDate(post.data.updatedDate ?? post.data.pubDate)}</div>
+              <h2 class="mt-2 line-clamp-2 text-base font-semibold leading-snug text-slate-900 transition group-hover:text-blue-800">
+                {post.data.title}
+              </h2>
+              <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-slate-600">
+                {post.data.description}
+              </p>
+              <div class="mt-4 text-sm font-semibold text-blue-800">Continuar lendo →</div>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <!-- Paginação -->
+    <div class="mt-10 flex flex-col items-center gap-4">
+      <div class="flex items-center justify-between gap-3 w-full">
+        <a
+          href={prevHref}
+          class="rounded-full border bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm hover:bg-slate-50"
+        >
+          ← Anterior
+        </a>
+
+        {nextHref ? (
+          <a
+            href={nextHref}
+            class="rounded-full border bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm hover:bg-slate-50"
+          >
+            Próxima →
+          </a>
+        ) : (
+          <span class="rounded-full border bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-400">
+            Próxima →
+          </span>
+        )}
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        <a
+          href="/blog"
+          class={`h-9 w-9 rounded-full border text-sm font-semibold flex items-center justify-center ${safePage === 1 ? "bg-slate-900 text-white border-slate-900" : "bg-white text-slate-800 hover:bg-slate-50"}`}
+          aria-label="Página 1"
+        >
+          1
+        </a>
+
+        {startPage > 2 ? <span class="px-1 text-slate-400">…</span> : null}
+
+        {pages.map((p) => (
+          <a
+            href={`/blog/page/${p}`}
+            class={`h-9 w-9 rounded-full border text-sm font-semibold flex items-center justify-center ${p === safePage ? "bg-slate-900 text-white border-slate-900" : "bg-white text-slate-800 hover:bg-slate-50"}`}
+            aria-label={`Página ${p}`}
+          >
+            {p}
+          </a>
+        ))}
+
+        {endPage < totalPages ? <span class="px-1 text-slate-400">…</span> : null}
+      </div>
+
+      <p class="text-xs text-slate-500">Página {safePage} de {totalPages}.</p>
+    </div>
+  </section>
+</Layout>

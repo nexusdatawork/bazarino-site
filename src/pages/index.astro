@@ -1,58 +1,546 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { achadosCategories } from "../data/achadosCategories";
-import { getLatestAchados } from "../data/achados";
+import DealCard from "../components/DealCard.astro";
 
-const latest = getLatestAchados(12);
+// Edições + categorias (sua camada de fonte)
+import { listDailyEditions, listCategoriesByFrequency } from "@/lib/achadosSource";
+
+// Itens flatten (vem do achados-editions.json via src/data/achados.ts)
+import { achados } from "../data/achados";
+
+// Slug -> Título bonitinho
+import { titleFromSlug } from "@/lib/slug";
+
+// Links (ajuste depois)
+const LINKS = {
+  telegram: "https://t.me",
+  whatsapp: "https://wa.me/5599999999999?text=QUERO%20OFERTAS",
+};
+
+// Helpers
+const brl = (n: number) =>
+  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(Number(n || 0));
+
+const daily = listDailyEditions();
+const latestEdition = daily?.[0] ?? null;
+
+const cats = listCategoriesByFrequency(8);
+
+// ----- TOP 10 HOJE -----
+const todayDate = latestEdition?.date ?? null;
+
+const top10Today = todayDate
+  ? [...achados]
+      .filter((a) => a.date === todayDate)
+      .sort((a, b) => Number(b.score ?? 0) - Number(a.score ?? 0))
+      .slice(0, 10)
+  : [];
+
+// ----- MELHORES RECENTES (6) -----
+const recentPool = [...achados]
+  .sort((a, b) => {
+    const da = a.date ? new Date(a.date).getTime() : 0;
+    const db = b.date ? new Date(b.date).getTime() : 0;
+    return db - da;
+  })
+  .slice(0, 30);
+
+const bestRecent6 = [...recentPool]
+  .sort((a, b) => Number(b.score ?? 0) - Number(a.score ?? 0))
+  .slice(0, 6);
+
+// Mini-card do topo (um item por vez)
+const firstTop = top10Today[0] ?? null;
+
+const top1Href = top10Today?.[0]?.href ?? null;
+
 ---
 
+<Layout title="O Bazarino | Achados bons e finos">
+  <!-- HERO -->
+  <section class="relative mx-auto max-w-6xl px-4 pt-0 pb-8 -mt-6">
+    <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+      <!-- ESQUERDA -->
+      <div>
+        <div class="relative mb-2 flex justify-center">
+          <img
+            src="/images/brand/bazarino_baixo.png"
+            alt="Bazarino apresentando os achados"
+            class="
+              h-64 w-auto
+              sm:h-72
+              md:h-80
+              lg:h-[22rem]
+              xl:h-[26rem]
+              translate-y-8
+            "
+            loading="eager"
+          />
+        </div>
 
-<Layout title="Bazarino | Curadoria inteligente de ofertas">
-  <section class="grid gap-12 lg:grid-cols-2 lg:items-center">
-    <!-- Texto -->
-    <div>
-      <p class="text-sm text-slate-500">
-        Curadoria de ofertas
-      </p>
+        <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs text-slate-600 shadow-sm">
+          <span aria-hidden="true">✨</span>
+          Curadoria humana de ofertas reais
+        </div>
 
-      <h1 class="mt-2 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-        Achados bons e finos,<br />sem ruído e sem cilada.
-      </h1>
+        <h1 class="mt-2 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
+          Os melhores <span class="text-[var(--bazarino-orange)] underline decoration-[var(--bazarino-orange)] decoration-2 underline-offset-8">achados</span><br />
+          em um só lugar
+        </h1>
 
-      <p class="mt-4 max-w-xl text-slate-600">
-        O Bazarino seleciona ofertas reais, com critério e bom senso, para você comprar melhor.
-      </p>
+        <p class="mt-5 max-w-xl text-slate-600 text-base sm:text-lg">
+          Chega de perder tempo! Eu filtro ofertas diariamente para você receber só o que realmente vale a pena.
+        </p>
 
-      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-        <a
-          href="/achados"
-          class="rounded-xl bg-slate-900 px-6 py-3 text-center text-sm font-semibold text-white hover:bg-slate-800"
-        >
-          Ver achados
-        </a>
+        <div class="mt-5 flex flex-col gap-3 sm:flex-row">
+          <a
+            href={LINKS.whatsapp}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--bazarino-blue)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--bazarino-blue-dark)]"
+          >
+            <span aria-hidden="true">💬</span>
+            Receber no WhatsApp
+          </a>
 
-        <a
-          href="/sobre"
-          class="rounded-xl border border-slate-300 px-6 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
-        >
-          Como funciona
-        </a>
+          <a
+            href={LINKS.telegram}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-50"
+          >
+            <span aria-hidden="true">✈️</span>
+            Entrar no Telegram
+          </a>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-4 text-xs text-slate-500">
+          <span class="inline-flex items-center gap-2"><span aria-hidden="true">📉</span> Até 80% OFF</span>
+          <span class="inline-flex items-center gap-2"><span aria-hidden="true">✅</span> 100% verificado</span>
+          <span class="inline-flex items-center gap-2"><span aria-hidden="true">👥</span> +10k pessoas</span>
+        </div>
       </div>
-    </div>
 
-    <!-- Cards -->
-    <div class="grid gap-4 sm:grid-cols-2">
-      {["Tech", "Casa", "Moda", "Games"].map((categoria) => (
-        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-          <div class="text-sm text-slate-500">Categoria</div>
-          <div class="mt-1 text-lg font-semibold text-slate-900">
-            {categoria}
+      <!-- DIREITA: CARD ÚNICO MAIOR (TOP 10 HOJE) -->
+      <div class="lg:justify-self-end">
+        <div class="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span aria-hidden="true">🏆</span>
+              <p class="text-sm font-semibold text-slate-900">Os melhores achados de hoje</p>
+            </div>
+            <span class="rounded-full bg-orange-100 px-2 py-1 text-[10px] font-semibold text-orange-700">
+              TOP 10
+            </span>
           </div>
-          <div class="mt-2 text-sm text-slate-600">
-            Seleção curada de ofertas confiáveis.
+
+          {todayDate ? (
+            <p class="mt-2 text-xs text-slate-500">Edição: {todayDate}</p>
+          ) : (
+            <p class="mt-2 text-xs text-slate-500">Sem edição publicada ainda.</p>
+          )}
+
+          <!-- item principal rotativo -->
+          <div class="mt-4 rounded-xl border border-slate-200 overflow-hidden" id="top10-card">
+            <a
+              href="/achados"
+              class="block group"
+              id="top10-link"
+            >
+              <div class="aspect-[4/3] bg-slate-100 overflow-hidden">
+                <img
+                  src="/images/placeholders/image-not-found.svg"
+                  alt="Top 10"
+                  class="h-full w-full object-cover group-hover:scale-105 transition-transform"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='/images/placeholders/image-not-found.svg';"
+                  id="top10-img"
+                />
+              </div>
+
+              <div class="p-4">
+                <div class="flex items-center justify-between gap-3">
+                  <p class="text-xs uppercase tracking-wide text-slate-500" id="top10-store"></p>
+                  <span
+                    class="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-700"
+                    id="top10-rank"
+                  >
+                    #1
+                  </span>
+                </div>
+
+                <p class="mt-1 line-clamp-2 text-sm font-semibold text-slate-900" id="top10-title">
+                  Carregando…
+                </p>
+
+                <p class="mt-2 text-sm font-bold text-[var(--bazarino-orange)]" id="top10-price"></p>
+
+                <p class="mt-2 text-xs text-slate-600 line-clamp-2" id="top10-reason">
+                  Selecionado por critério, não por barulho.
+                </p>
+              </div>
+            </a>
+          </div>
+
+          <div class="mt-4 flex items-center justify-between">
+            <a href="/achados" class="text-sm font-semibold text-[var(--bazarino-blue)] hover:underline">
+              Ver Top 10 completo →
+            </a>
+
+            <div class="flex gap-2">
+              <button
+                class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                id="top10-prev"
+                type="button"
+              >
+                ◀
+              </button>
+              <button
+                class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                id="top10-next"
+                type="button"
+              >
+                ▶
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-3 flex items-center justify-center gap-1" id="top10-dots">
+            {top10Today.map((_, i) => (
+              <button
+                class="h-2.5 w-2.5 rounded-full bg-slate-300 transition"
+                aria-label={`Ver posição ${i + 1}`}
+                data-index={i}
+                type="button"
+              />
+            ))}
           </div>
         </div>
-      ))}
+
+        <!-- Últimas do Blog (mantém do figma) -->
+        <div class="mt-5 w-full max-w-md rounded-2xl bg-[var(--bazarino-blue)] p-5 text-white">
+          <div class="flex items-center gap-2">
+            <span aria-hidden="true">⭐</span>
+            <p class="text-sm font-semibold">Últimas do Blog</p>
+          </div>
+
+          <div class="mt-4 grid gap-3">
+            <a href="/blog" class="rounded-xl bg-white/10 px-4 py-3 hover:bg-white/15 transition">
+              <div class="flex items-center justify-between gap-3">
+                <span class="text-sm font-semibold">Top 10 Eletrônicos para 2024</span>
+                <span class="rounded-full bg-orange-400 px-2 py-1 text-[10px] font-semibold text-slate-900">Guia</span>
+              </div>
+            </a>
+
+            <a href="/blog" class="rounded-xl bg-white/10 px-4 py-3 hover:bg-white/15 transition">
+              <div class="flex items-center justify-between gap-3">
+                <span class="text-sm font-semibold">Como identificar ofertas reais</span>
+                <span class="rounded-full bg-orange-400 px-2 py-1 text-[10px] font-semibold text-slate-900">Dica</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+
+  <!-- GRID “MELHORES RECENTES” (6 rankeados por score) -->
+  <section class="mx-auto max-w-6xl px-4 pb-10">
+    <div class="text-center">
+      <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">VITRINE</p>
+      <h2 class="mt-2 text-2xl font-semibold text-slate-900">Os melhores achados recentes</h2>
+      <p class="mt-2 text-sm text-slate-600">Selecionados por score. Atualizações frequentes quando surge coisa boa.</p>
+    </div>
+
+    <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {bestRecent6.map((a) => (
+        <DealCard
+          title={a.title}
+          store={a.store}
+          price={a.price}
+          oldPrice={a.oldPrice}
+          image={a.image}
+          href={a.href}
+          tag={a.category}
+          reason={a.reason}
+          badge={top1Href && a.href === top1Href ? "#1 HOJE" : undefined}
+        />
+      ))}
+    </div>
+
+    <div class="mt-8 flex justify-center">
+      <a
+        href="/achados"
+        class="inline-flex items-center justify-center rounded-xl bg-[var(--bazarino-orange)] px-6 py-3 text-sm font-semibold text-white hover:opacity-90"
+      >
+        Ver todos os achados
+      </a>
+    </div>
+  </section>
+
+  <!-- CATEGORIAS (AGORA ABAIXO DOS CARDS, SEM EMOJI E COM NOME BONITO) -->
+  {cats.length ? (
+    <section class="mx-auto max-w-6xl px-4 pb-14">
+      <div class="flex items-center justify-between gap-4">
+        <h2 class="text-lg font-semibold text-slate-900">Explorar por categoria</h2>
+        <a href="/achados" class="text-sm font-semibold text-[var(--bazarino-blue)] hover:underline">Ver tudo →</a>
+      </div>
+
+      <div class="mt-4 flex flex-wrap gap-2">
+        {cats.map((c) => (
+          <a
+            href={`/achados/categoria/${c.slug}`}
+            class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 transition"
+          >
+            {titleFromSlug(c.slug)}
+            <span class="ml-2 text-slate-500 font-semibold">({c.count})</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  ) : null}
+
+  <!-- POR QUE CONFIAR -->
+  <section class="mx-auto max-w-6xl px-4 pb-14">
+    <div class="text-center">
+      <h3 class="text-2xl font-semibold text-slate-900">
+        Por que confiar no <span class="text-[var(--bazarino-orange)]">Bazarino</span>?
+      </h3>
+      <p class="mt-2 text-sm text-slate-600">Curadoria, não ruído. Menos posts, mais acerto.</p>
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 text-center">
+        <div class="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-xl bg-orange-50 text-[var(--bazarino-orange)]">🧠</div>
+        <p class="font-semibold text-slate-900">Curadoria Humana</p>
+        <p class="mt-2 text-sm text-slate-600">Selecionamos pelo custo-benefício e confiança.</p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 text-center">
+        <div class="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-xl bg-orange-50 text-[var(--bazarino-orange)]">🔎</div>
+        <p class="font-semibold text-slate-900">Transparência</p>
+        <p class="mt-2 text-sm text-slate-600">Se não vale, a gente fala. Se vale, a gente explica.</p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 text-center">
+        <div class="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-xl bg-orange-50 text-[var(--bazarino-orange)]">✅</div>
+        <p class="font-semibold text-slate-900">Só o Essencial</p>
+        <p class="mt-2 text-sm text-slate-600">Sem spam e sem enrolação.</p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 text-center">
+        <div class="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-xl bg-orange-50 text-[var(--bazarino-orange)]">🛡️</div>
+        <p class="font-semibold text-slate-900">Sem Spam</p>
+        <p class="mt-2 text-sm text-slate-600">Você escolhe onde receber.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="bg-[var(--bazarino-blue)]">
+    <div class="mx-auto max-w-6xl px-4 py-14 text-white">
+      <div class="text-center">
+        <h3 class="text-2xl font-semibold">Comece a receber os melhores achados</h3>
+        <p class="mt-2 text-sm text-white/80">Escolha um canal preferido e receba apenas o que vale a pena.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        <div class="rounded-2xl bg-white p-6 text-slate-900">
+          <div class="flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-xl bg-green-50">💬</span>
+            <div>
+              <p class="font-semibold">WhatsApp</p>
+              <p class="text-sm text-slate-600">Para quem quer os top achados</p>
+            </div>
+          </div>
+          <a
+            href={LINKS.whatsapp}
+            target="_blank"
+            rel="noopener"
+            class="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-[var(--bazarino-orange)] px-6 py-3 text-sm font-semibold text-white hover:opacity-90"
+          >
+            Quero no WhatsApp
+          </a>
+        </div>
+
+        <div class="rounded-2xl bg-white p-6 text-slate-900">
+          <div class="flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-xl bg-sky-50">✈️</span>
+            <div>
+              <p class="font-semibold">Telegram</p>
+              <p class="text-sm text-slate-600">Para escala e volume</p>
+            </div>
+          </div>
+          <a
+            href={LINKS.telegram}
+            target="_blank"
+            rel="noopener"
+            class="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+          >
+            Entrar no Telegram
+          </a>
+        </div>
+      </div>
+
+      <p class="mt-10 text-center text-xs text-white/70">
+        * Você pode sair a qualquer momento.
+      </p>
+    </div>
+  </section>
+
+  <!-- DADOS DO TOP 10 -->
+  <script
+    type="application/json"
+    id="top10-data"
+    set:html={JSON.stringify(top10Today)}
+  ></script>
+
+
+  <!-- SCRIPT ROBUSTO: autoplay + botões + dots (sem depender de Tailwind no JS) -->
+  <script is:inline>
+    (() => {
+      function initTop10() {
+        // evita inicializar 2x (HMR / swaps)
+        if (window.__TOP10_INIT__) return;
+        window.__TOP10_INIT__ = true;
+
+        const dataEl = document.getElementById("top10-data");
+        if (!dataEl) return;
+
+        let items = [];
+        try {
+          items = JSON.parse(dataEl.textContent || "[]");
+        } catch (e) {
+          console.error("Top10 JSON inválido:", e);
+          return;
+        }
+
+        if (!Array.isArray(items) || items.length <= 1) return;
+
+        const link = document.getElementById("top10-link");
+        const img = document.getElementById("top10-img");
+        const store = document.getElementById("top10-store");
+        const title = document.getElementById("top10-title");
+        const price = document.getElementById("top10-price");
+        const reason = document.getElementById("top10-reason");
+        const rank = document.getElementById("top10-rank");
+
+        const prev = document.getElementById("top10-prev");
+        const next = document.getElementById("top10-next");
+        const card = document.getElementById("top10-card");
+        const dotsWrap = document.getElementById("top10-dots");
+        const dots = dotsWrap ? Array.from(dotsWrap.querySelectorAll("button")) : [];
+
+        let idx = 0;
+        let timer = null;
+
+        const fmt = (n) =>
+          new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(Number(n || 0));
+
+        function setDotActive(i) {
+          dots.forEach((d, di) => {
+            d.style.backgroundColor = di === i ? "var(--bazarino-orange)" : "#cbd5e1";
+          });
+        }
+
+        function render(i) {
+          const a = items[i];
+          if (!a) return;
+
+          // LINK
+          const href = a.href || "/achados";
+          link?.setAttribute("href", href);
+
+          const isExternal = typeof href === "string" && href.startsWith("http");
+          if (isExternal) {
+            link?.setAttribute("target", "_blank");
+            link?.setAttribute("rel", "sponsored noopener noreferrer");
+          } else {
+            link?.removeAttribute("target");
+            link?.removeAttribute("rel");
+          }
+
+          // IMAGEM
+          if (img) {
+            img.src = a.image || "/images/placeholders/image-not-found.svg";
+            img.alt = a.title || "Top 10";
+          }
+
+          // TEXTOS
+          store && (store.textContent = a.store || "");
+          title && (title.textContent = a.title || "");
+          price && (price.textContent = fmt(a.price));
+          reason && (reason.textContent = a.reason || "Selecionado por critério, não por barulho.");
+          rank && (rank.textContent = `#${i + 1}`);
+
+          // Destaque visual do #1 (primeiro item)
+          const topCard = document.getElementById("top10-card");
+          if (topCard) topCard.classList.toggle("top10-featured", i === 0);
+
+
+          setDotActive(i);
+        }
+
+
+        function stop() {
+          if (timer) clearInterval(timer);
+          timer = null;
+        }
+
+        function start() {
+          stop();
+          timer = setInterval(() => {
+            idx = (idx + 1) % items.length;
+            render(idx);
+          }, 3500);
+        }
+
+        prev?.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          idx = (idx - 1 + items.length) % items.length;
+          render(idx);
+          start();
+        });
+
+        next?.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          idx = (idx + 1) % items.length;
+          render(idx);
+          start();
+        });
+
+        dots.forEach((d, i) => {
+          d.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            idx = i;
+            render(idx);
+            start();
+          });
+        });
+
+        card?.addEventListener("mouseenter", stop);
+        card?.addEventListener("mouseleave", start);
+
+        render(0);
+        start();
+      }
+
+      // roda mesmo se DOMContentLoaded já passou
+      if (document.readyState === "loading") {
+        window.addEventListener("DOMContentLoaded", initTop10, { once: true });
+      } else {
+        initTop10();
+      }
+
+      // Astro dev/HMR às vezes troca a página sem recarregar tudo
+      window.addEventListener("astro:page-load", () => {
+        window.__TOP10_INIT__ = false;
+        initTop10();
+      });
+    })();
+  </script>
+
 </Layout>

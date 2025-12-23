@@ -1,34 +1,30 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 
 /**
- * 1. Definimos todas as rotas estáticas do blog
- *    com base nos arquivos Markdown
+ * Gera rotas para todos os posts .md em src/content/blog
+ * (exceto drafts).
  */
 export async function getStaticPaths() {
-  const posts: CollectionEntry<"blog">[] = await getCollection("blog");
-
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  const posts = await getCollection("blog");
+  return posts
+    .filter((p) => !p.data.draft)
+    .map((p) => ({ params: { slug: p.slug } }));
 }
 
-/**
- * 2. Recebemos o post específico desta página
- */
-const { post }: { post: CollectionEntry<"blog"> } = Astro.props;
+const { slug } = Astro.params;
 
-/**
- * 3. Renderizamos o conteúdo Markdown como HTML
- */
-const { Content } = await post.render();
+const posts = await getCollection("blog");
+const entry = posts.find((p) => p.slug === slug);
+
+if (!entry) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await entry.render();
 ---
 
-<Layout title={`${post.data.title} | Bazarino`}>
-  <article class="prose max-w-none">
-    <h1>{post.data.title}</h1>
-    <Content />
-  </article>
-</Layout>
+<BlogPostLayout {...entry.data}>
+  <Content />
+</BlogPostLayout>

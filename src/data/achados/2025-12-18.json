@@ -1,0 +1,97 @@
+{
+  "date": "2025-12-18",
+  "type": "daily",
+  "title": "Achados do dia 18/12",
+  "kicker": "Curadoria diária",
+  "intro": "Os achados com melhor custo-benefício do dia, sem ruído.",
+  "items": [
+    {
+      "id": "sample-casa-e-cozinha-1",
+      "name": "Achado 1 em Casa-E-Cozinha",
+      "category": "casa-e-cozinha",
+      "vendor": "Amazon",
+      "price": 772.67,
+      "oldPrice": 1233.99,
+      "image": "https://picsum.photos/seed/casa-e-cozinha-1/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 95
+    },
+    {
+      "id": "sample-casa-e-cozinha-2",
+      "name": "Achado 2 em Casa-E-Cozinha",
+      "category": "casa-e-cozinha",
+      "vendor": "Magalu",
+      "price": 185.3,
+      "oldPrice": 855.89,
+      "image": "https://picsum.photos/seed/casa-e-cozinha-2/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 85
+    },
+    {
+      "id": "sample-moda-3",
+      "name": "Achado 3 em Moda",
+      "category": "moda",
+      "vendor": "Kabum",
+      "price": 762.02,
+      "oldPrice": 984.02,
+      "image": "https://picsum.photos/seed/moda-3/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 81
+    },
+    {
+      "id": "sample-games-4",
+      "name": "Achado 4 em Games",
+      "category": "games",
+      "vendor": "Mercado Livre",
+      "price": 801.92,
+      "oldPrice": 498.58,
+      "image": "https://picsum.photos/seed/games-4/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 70
+    },
+    {
+      "id": "sample-games-5",
+      "name": "Achado 5 em Games",
+      "category": "games",
+      "vendor": "Magalu",
+      "price": 845.87,
+      "oldPrice": 201.56,
+      "image": "https://picsum.photos/seed/games-5/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 83
+    },
+    {
+      "id": "sample-eletronicos-6",
+      "name": "Achado 6 em Eletronicos",
+      "category": "eletronicos",
+      "vendor": "Magalu",
+      "price": 148.56,
+      "oldPrice": 317.68,
+      "image": "https://picsum.photos/seed/eletronicos-6/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 73
+    },
+    {
+      "id": "sample-games-7",
+      "name": "Achado 7 em Games",
+      "category": "games",
+      "vendor": "Mercado Livre",
+      "price": 308.21,
+      "oldPrice": 1155.36,
+      "image": "https://picsum.photos/seed/games-7/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 70
+    },
+    {
+      "id": "sample-eletronicos-8",
+      "name": "Achado 8 em Eletronicos",
+      "category": "eletronicos",
+      "vendor": "Kabum",
+      "price": 425.91,
+      "oldPrice": 118.5,
+      "image": "https://picsum.photos/seed/eletronicos-8/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 71
+    }
+  ]
+}

@@ -1,21 +1,35 @@
 ---
 import "../styles/global.css";
-const { title = "Bazarino" } = Astro.props;
-
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+/**
+ * Layout base do site.
+ * Importa CSS global (Tailwind) e fornece um slot de head para SEO por página.
+ */
+const { title = "Bazarino" } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="pt-BR">
   <head>
+    {/* Charset primeiro: garante acentuação correta */}
     <meta charset="UTF-8" />
+
+    {/* Responsividade */}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {/* Título padrão (páginas podem sobrescrever via props) */}
     <title>{title}</title>
+
+    {/* Descrição padrão (páginas podem sobrescrever via slot="head") */}
     <meta
       name="description"
       content="Bazarino — curadoria inteligente de ofertas confiáveis."
     />
+
+    {/* SEO extra por página (canonical, og, json-ld etc) */}
+    <slot name="head" />
   </head>
 
   <body class="min-h-screen flex flex-col bg-white text-slate-900">

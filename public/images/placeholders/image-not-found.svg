@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-label="Imagem não encontrada">
+  <rect width="1200" height="900" fill="#F1F5F9"/>
+  <rect x="140" y="120" width="920" height="660" rx="32" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="6"/>
+  <g fill="none" stroke="#0B2A5B" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <path d="M340 620h520"/>
+    <path d="M380 520l110-140 120 150 90-110 140 170"/>
+    <rect x="320" y="260" width="560" height="320" rx="24"/>
+    <path d="M760 340l70-70"/>
+    <path d="M830 340l-70-70"/>
+  </g>
+  <text x="600" y="705" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="34" fill="#0B2A5B">Imagem indisponível</text>
+  <text x="600" y="752" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="22" fill="#64748B">O link pode ter expirado ou o fornecedor removeu a foto.</text>
+</svg>

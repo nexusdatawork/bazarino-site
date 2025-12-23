@@ -1,0 +1,303 @@
+[
+  {
+    "type": "daily",
+    "date": "2025-12-19",
+    "title": "Achados do Dia: tecnologia útil e casa esperta",
+    "kicker": "Edição do dia",
+    "intro": "Curadoria com foco em custo-benefício real. Priorizamos itens com histórico de preço estável e boa reputação.",
+    "outro": "Se algum link expirar, pode ser por término de estoque ou cupom. Amanhã tem nova edição.",
+    "methodologyTitle": "Metodologia",
+    "methodology": [
+    "Priorizamos histórico de preço estável e reputação do vendedor.",
+    "Checamos avaliações e sinais de desconto artificial.",
+    "Selecionamos itens com bom custo-benefício para uso real.",
+    "Links podem expirar por estoque ou mudança de preço."
+    ],
+    "ctaText": "Quer receber a edição automática? Em breve: automação + newsletter.",
+    "ctaLink": "/contato",
+    "top3Ids": ["amz-anc-101", "ml-asp-221", "kbm-nvme-1tb-310"],
+    "items": [
+      {
+        "id": "amz-anc-101",
+        "name": "Fone Bluetooth ANC (Bateria 40h)",
+        "category": "tech",
+        "vendor": "Amazon",
+        "price": 179.9,
+        "oldPrice": 249.9,
+        "image": "https://picsum.photos/seed/fone-anc/600/400",
+        "affiliateUrl": "https://example.com/fone-anc",
+        "score": 8.8
+      },
+      {
+        "id": "ml-asp-221",
+        "name": "Aspirador Vertical 2 em 1 (Leve e compacto)",
+        "category": "casa-e-cozinha",
+        "vendor": "Mercado Livre",
+        "price": 229.9,
+        "oldPrice": 319.9,
+        "image": "https://picsum.photos/seed/aspirador/600/400",
+        "affiliateUrl": "https://example.com/aspirador",
+        "score": 8.6
+      },
+      {
+        "id": "kbm-nvme-1tb-310",
+        "name": "SSD NVMe 1TB (PCIe 3.0)",
+        "category": "tech",
+        "vendor": "Kabum",
+        "price": 299.9,
+        "oldPrice": 379.9,
+        "image": "https://picsum.photos/seed/ssd-nvme/600/400",
+        "affiliateUrl": "https://example.com/ssd-1tb",
+        "score": 8.7
+      },
+      {
+        "id": "mgl-airf-404",
+        "name": "Air Fryer 4L (básica e eficiente)",
+        "category": "casa-e-cozinha",
+        "vendor": "Magalu",
+        "price": 249.0,
+        "oldPrice": 329.0,
+        "image": "https://picsum.photos/seed/airfryer/600/400",
+        "affiliateUrl": "https://example.com/airfryer",
+        "score": 8.2
+      },
+      {
+        "id": "amz-lamp-204",
+        "name": "Kit Lâmpadas Smart (2 unidades)",
+        "category": "casa-e-cozinha",
+        "vendor": "Amazon",
+        "price": 89.9,
+        "oldPrice": 129.9,
+        "image": "https://picsum.photos/seed/lampadas/600/400",
+        "affiliateUrl": "https://example.com/lampadas",
+        "score": 8.1
+      },
+      {
+        "id": "shp-777",
+        "name": "Organizador Modular Multiuso (Kit 6 peças)",
+        "category": "casa-e-cozinha",
+        "vendor": "Shopee",
+        "price": 59.9,
+        "oldPrice": 79.9,
+        "image": "https://picsum.photos/seed/organizador/600/400",
+        "affiliateUrl": "https://example.com/organizador",
+        "score": 8.4
+      },
+      {
+        "id": "ntsh-whey-1kg-110",
+        "name": "Whey Protein 1kg (Baunilha)",
+        "category": "fitness",
+        "vendor": "Netshoes",
+        "price": 99.9,
+        "oldPrice": 139.9,
+        "image": "https://picsum.photos/seed/whey/600/400",
+        "affiliateUrl": "https://example.com/whey",
+        "score": 7.9
+      },
+      {
+        "id": "amz-garrafa-500-501",
+        "name": "Garrafa Térmica 500ml (inox)",
+        "category": "fitness",
+        "vendor": "Amazon",
+        "price": 59.9,
+        "oldPrice": 89.9,
+        "image": "https://picsum.photos/seed/garrafa/600/400",
+        "affiliateUrl": "https://example.com/garrafa",
+        "score": 8.0
+      },
+      {
+        "id": "ali-cabo-usbc-2m-020",
+        "name": "Cabo USB-C 2m (reforçado)",
+        "category": "tech",
+        "vendor": "AliExpress",
+        "price": 19.9,
+        "oldPrice": 34.9,
+        "image": "https://picsum.photos/seed/cabo-usbc/600/400",
+        "affiliateUrl": "https://example.com/cabo",
+        "score": 7.8
+      },
+      {
+        "id": "amz-mochila-anti-890",
+        "name": "Mochila Anti-furto (Notebook 15\")",
+        "category": "moda",
+        "vendor": "Amazon",
+        "price": 109.9,
+        "oldPrice": 159.9,
+        "image": "https://picsum.photos/seed/mochila/600/400",
+        "affiliateUrl": "https://example.com/mochila",
+        "score": 7.7
+      }
+    ]
+  },
+
+  {
+    "type": "category",
+    "date": "2025-12-19",
+    "category": "tech",
+    "categoryTitle": "Tech",
+    "title": "Tech do Dia: upgrades e acessórios úteis",
+    "kicker": "Categoria",
+    "intro": "Itens que melhoram seu setup: armazenamento, áudio e periféricos sem hype vazio.",
+    "items": [
+      {
+        "id": "kbm-nvme-1tb-310",
+        "name": "SSD NVMe 1TB (PCIe 3.0)",
+        "category": "tech",
+        "vendor": "Kabum",
+        "price": 299.9,
+        "oldPrice": 379.9,
+        "image": "https://picsum.photos/seed/ssd-nvme/600/400",
+        "affiliateUrl": "https://example.com/ssd-1tb",
+        "score": 8.7
+      },
+      {
+        "id": "amz-anc-101",
+        "name": "Fone Bluetooth ANC (Bateria 40h)",
+        "category": "tech",
+        "vendor": "Amazon",
+        "price": 179.9,
+        "oldPrice": 249.9,
+        "image": "https://picsum.photos/seed/fone-anc/600/400",
+        "affiliateUrl": "https://example.com/fone-anc",
+        "score": 8.8
+      },
+      {
+        "id": "ali-cabo-usbc-2m-020",
+        "name": "Cabo USB-C 2m (reforçado)",
+        "category": "tech",
+        "vendor": "AliExpress",
+        "price": 19.9,
+        "oldPrice": 34.9,
+        "image": "https://picsum.photos/seed/cabo-usbc/600/400",
+        "affiliateUrl": "https://example.com/cabo",
+        "score": 7.8
+      }
+    ]
+  },
+
+  {
+    "type": "category",
+    "date": "2025-12-19",
+    "category": "casa-e-cozinha",
+    "categoryTitle": "Casa & Cozinha",
+    "title": "Casa & Cozinha: o kit do dia",
+    "kicker": "Categoria",
+    "intro": "Itens práticos para rotina, cozinha e limpeza sem frescura.",
+    "items": [
+      {
+        "id": "ml-asp-221",
+        "name": "Aspirador Vertical 2 em 1 (Leve e compacto)",
+        "category": "casa-e-cozinha",
+        "vendor": "Mercado Livre",
+        "price": 229.9,
+        "oldPrice": 319.9,
+        "image": "https://picsum.photos/seed/aspirador/600/400",
+        "affiliateUrl": "https://example.com/aspirador",
+        "score": 8.6
+      },
+      {
+        "id": "mgl-airf-404",
+        "name": "Air Fryer 4L (básica e eficiente)",
+        "category": "casa-e-cozinha",
+        "vendor": "Magalu",
+        "price": 249.0,
+        "oldPrice": 329.0,
+        "image": "https://picsum.photos/seed/airfryer/600/400",
+        "affiliateUrl": "https://example.com/airfryer",
+        "score": 8.2
+      },
+      {
+        "id": "shp-777",
+        "name": "Organizador Modular Multiuso (Kit 6 peças)",
+        "category": "casa-e-cozinha",
+        "vendor": "Shopee",
+        "price": 59.9,
+        "oldPrice": 79.9,
+        "image": "https://picsum.photos/seed/organizador/600/400",
+        "affiliateUrl": "https://example.com/organizador",
+        "score": 8.4
+      }
+    ]
+  },
+
+  {
+    "type": "daily",
+    "date": "2025-12-18",
+    "title": "Achados do Dia: conforto, rotina e um pouco de fitness",
+    "kicker": "Edição do dia",
+    "intro": "Hoje a curadoria puxa para itens de rotina e bem-estar com preço honesto.",
+    "outro": "Volte amanhã: a edição muda e os links bons também.",
+    "methodologyTitle": "Metodologia",
+    "methodology": [
+    "Priorizamos histórico de preço estável e reputação do vendedor.",
+    "Checamos avaliações e sinais de desconto artificial.",
+    "Selecionamos itens com bom custo-benefício para uso real.",
+    "Links podem expirar por estoque ou mudança de preço."
+    ],
+    "ctaText": "Quer receber a edição automática? Em breve: automação + newsletter.",
+    "ctaLink": "/contato",
+    "top3Ids": ["amz-traves-302", "mgl-lencol-901", "amz-halter-2kg-020"],
+    "items": [
+      {
+        "id": "amz-traves-302",
+        "name": "Travesseiro Viscoelástico (conforto médio)",
+        "category": "casa-e-cozinha",
+        "vendor": "Amazon",
+        "price": 79.9,
+        "oldPrice": 119.9,
+        "image": "https://picsum.photos/seed/travesseiro/600/400",
+        "affiliateUrl": "https://example.com/travesseiro",
+        "score": 8.3
+      },
+      {
+        "id": "mgl-lencol-901",
+        "name": "Jogo de Lençol Queen (microfibra)",
+        "category": "casa-e-cozinha",
+        "vendor": "Magalu",
+        "price": 89.9,
+        "oldPrice": 129.9,
+        "image": "https://picsum.photos/seed/lencol/600/400",
+        "affiliateUrl": "https://example.com/lencol",
+        "score": 8.0
+      },
+      {
+        "id": "amz-halter-2kg-020",
+        "name": "Par de Halteres 2kg (emborrachado)",
+        "category": "fitness",
+        "vendor": "Amazon",
+        "price": 49.9,
+        "oldPrice": 69.9,
+        "image": "https://picsum.photos/seed/halteres/600/400",
+        "affiliateUrl": "https://example.com/halteres",
+        "score": 7.9
+      },
+      {
+        "id": "ml-camiseta-dry-100",
+        "name": "Camiseta Dry Fit (masculina)",
+        "category": "moda",
+        "vendor": "Mercado Livre",
+        "price": 39.9,
+        "oldPrice": 59.9,
+        "image": "https://picsum.photos/seed/camiseta/600/400",
+        "affiliateUrl": "https://example.com/camiseta",
+        "score": 7.6
+      },
+      {
+        "id": "kbm-mouse-sil-088",
+        "name": "Mouse sem fio silencioso",
+        "category": "tech",
+        "vendor": "Kabum",
+        "price": 49.9,
+        "oldPrice": 79.9,
+        "image": "https://picsum.photos/seed/mouse/600/400",
+        "affiliateUrl": "https://example.com/mouse",
+        "score": 7.8
+      },
+      {
+      "title": "...",
+      "price": 199,
+      "image": "..."
+      }
+    ]
+  }
+]

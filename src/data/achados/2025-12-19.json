@@ -1,0 +1,97 @@
+{
+  "date": "2025-12-19",
+  "type": "daily",
+  "title": "Achados do dia 19/12",
+  "kicker": "Curadoria diária",
+  "intro": "Os achados com melhor custo-benefício do dia, sem ruído.",
+  "items": [
+    {
+      "id": "sample-eletronicos-1",
+      "name": "Achado 1 em Eletronicos",
+      "category": "eletronicos",
+      "vendor": "Magalu",
+      "price": 916.45,
+      "oldPrice": 183.34,
+      "image": "https://picsum.photos/seed/eletronicos-1/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 83
+    },
+    {
+      "id": "sample-moda-2",
+      "name": "Achado 2 em Moda",
+      "category": "moda",
+      "vendor": "Magalu",
+      "price": 265.01,
+      "oldPrice": 1131.65,
+      "image": "https://picsum.photos/seed/moda-2/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 77
+    },
+    {
+      "id": "sample-eletronicos-3",
+      "name": "Achado 3 em Eletronicos",
+      "category": "eletronicos",
+      "vendor": "Mercado Livre",
+      "price": 83.09,
+      "oldPrice": 594.87,
+      "image": "https://picsum.photos/seed/eletronicos-3/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 95
+    },
+    {
+      "id": "sample-casa-e-cozinha-4",
+      "name": "Achado 4 em Casa-E-Cozinha",
+      "category": "casa-e-cozinha",
+      "vendor": "Kabum",
+      "price": 224.22,
+      "oldPrice": 415.09,
+      "image": "https://picsum.photos/seed/casa-e-cozinha-4/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 70
+    },
+    {
+      "id": "sample-casa-e-cozinha-5",
+      "name": "Achado 5 em Casa-E-Cozinha",
+      "category": "casa-e-cozinha",
+      "vendor": "Amazon",
+      "price": 885.44,
+      "oldPrice": 214.27,
+      "image": "https://picsum.photos/seed/casa-e-cozinha-5/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 74
+    },
+    {
+      "id": "sample-moda-6",
+      "name": "Achado 6 em Moda",
+      "category": "moda",
+      "vendor": "Magalu",
+      "price": 207.3,
+      "oldPrice": 556.83,
+      "image": "https://picsum.photos/seed/moda-6/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 77
+    },
+    {
+      "id": "sample-eletronicos-7",
+      "name": "Achado 7 em Eletronicos",
+      "category": "eletronicos",
+      "vendor": "Kabum",
+      "price": 229.95,
+      "oldPrice": 180.65,
+      "image": "https://picsum.photos/seed/eletronicos-7/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 71
+    },
+    {
+      "id": "sample-casa-e-cozinha-8",
+      "name": "Achado 8 em Casa-E-Cozinha",
+      "category": "casa-e-cozinha",
+      "vendor": "Magalu",
+      "price": 430.26,
+      "oldPrice": 874.17,
+      "image": "https://picsum.photos/seed/casa-e-cozinha-8/800/500",
+      "affiliateUrl": "https://example.com",
+      "score": 78
+    }
+  ]
+}
