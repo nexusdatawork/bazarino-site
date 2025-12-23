@@ -2,59 +2,55 @@
 import Layout from "@/layouts/Layout.astro";
 import { achados } from "@/data/achados";
 
-// gera slug “bonito” e estável
-function toSlug(s) {
-  return String(s ?? "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
-
-// ✅ IMPORTANTE: função declarada (não const) para evitar sumir no build SSR
-function getStableKey(a, index) {
-  // ajuste aqui se você tiver `id`, `sku`, `hash`, etc.
-  return (
-    a?.id ??
-    a?.sku ??
-    a?.hash ??
-    // fallback: posição (ok enquanto a lista for estável no build)
-    index
-  );
-}
-
-// 1) gera rotas para cada achado (SEO)
+/**
+ * ✅ Cloudflare-safe getStaticPaths:
+ * - NÃO depende de funções fora do getStaticPaths (evita "is not defined")
+ * - Calcula slug com id/sku/hash/index
+ */
 export function getStaticPaths() {
-  return (achados ?? []).map((a, index) => {
-    const key = getStableKey(a, index);
+  const toSlug = (s: unknown) =>
+    String(s ?? "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+
+  return (achados ?? []).map((a: any, index: number) => {
+    const key = a?.id ?? a?.sku ?? a?.hash ?? index;
     const base = toSlug(a?.title ?? "achado");
     return { params: { slug: `${base}-${key}` } };
   });
 }
 
-// 2) slug da URL
+// Helpers para o resto da página (fora do getStaticPaths pode!)
+const toSlugRender = (s: unknown) =>
+  String(s ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
 const { slug } = Astro.params;
 
-// 3) encontra o item pelo mesmo padrão de slug
 function findItemBySlug() {
   for (let i = 0; i < (achados ?? []).length; i++) {
-    const a = achados[i];
-    const key = getStableKey(a, i);
-    const base = toSlug(a?.title ?? "achado");
-    const made = `${base}-${key}`;
-    if (made === slug) return a;
+    const a: any = (achados as any[])[i];
+    const key = a?.id ?? a?.sku ?? a?.hash ?? i;
+    const base = toSlugRender(a?.title ?? "achado");
+    if (`${base}-${key}` === slug) return a;
   }
   return null;
 }
 
-const item = findItemBySlug();
+const item: any = findItemBySlug();
 
 if (!item) {
   throw new Error(`Achado não encontrado para slug: ${slug}`);
 }
 
-const brl = (n) => {
+const brl = (n: unknown) => {
   const v = Number(n);
   if (!Number.isFinite(v)) return "";
   return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -66,6 +62,7 @@ const pageDesc =
   "Achado bom e fino, com curadoria rápida e objetiva do O Bazarino.";
 
 const canonical = `https://obazarino.com.br/achados/${slug}`;
+const fallbackImg = `https://picsum.photos/seed/${encodeURIComponent(String(slug))}/1200/700`;
 ---
 
 <Layout title={pageTitle} description={pageDesc} canonical={canonical}>
@@ -84,35 +81,27 @@ const canonical = `https://obazarino.com.br/achados/${slug}`;
         {item.store ? (
           <span class="rounded-full border bg-white px-3 py-1">Loja: <strong>{item.store}</strong></span>
         ) : null}
+
         {item.category ? (
-          <a class="rounded-full border bg-white px-3 py-1 hover:bg-slate-50" href={`/achados/categoria/${toSlug(item.category)}`}>
+          <a class="rounded-full border bg-white px-3 py-1 hover:bg-slate-50" href={`/achados/categoria/${toSlugRender(item.category)}`}>
             Categoria: <strong>{item.category}</strong>
           </a>
         ) : null}
+
         {item.price ? (
           <span class="rounded-full border bg-white px-3 py-1">Preço: <strong>{brl(item.price)}</strong></span>
         ) : null}
       </div>
     </header>
 
-    {item.image ? (
-      <img
-        src={item.image}
-        alt={item.title}
-        loading="lazy"
-        decoding="async"
-        class="w-full rounded-3xl border object-cover"
-        onerror={`this.onerror=null;this.src='https://picsum.photos/seed/${encodeURIComponent(slug)}/1200/700';`}
-      />
-    ) : (
-      <img
-        src={`https://picsum.photos/seed/${encodeURIComponent(slug)}/1200/700`}
-        alt={item.title}
-        loading="lazy"
-        decoding="async"
-        class="w-full rounded-3xl border object-cover"
-      />
-    )}
+    <img
+      src={item.image ?? fallbackImg}
+      alt={item.title}
+      loading="lazy"
+      decoding="async"
+      class="w-full rounded-3xl border object-cover"
+      onerror={`this.onerror=null;this.src='${fallbackImg}';`}
+    />
 
     <div class="flex flex-wrap items-center gap-3">
       {item.href ? (
