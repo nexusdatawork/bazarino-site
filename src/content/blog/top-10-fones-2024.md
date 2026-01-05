@@ -6,7 +6,7 @@ tags: ['Áudio', 'Guia', 'Eletrônicos']
 author: "O Bazarino"
 image: "https://picsum.photos/seed/fones2024/1400/800"
 canonical: "https://obazarino.com.br/blog/top-10-fones-2024/"
-draft: false
+draft: true
 ---
 ## Como avaliamos
 

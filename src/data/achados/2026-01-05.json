@@ -1,0 +1,119 @@
+{
+  "date": "2026-01-05",
+  "type": "daily",
+  "title": "Achados do dia 05/01",
+  "kicker": "Curadoria diária",
+  "intro": "Os achados com melhor custo-benefício do dia, sem ruído.",
+  "items": [
+    {
+      "id": "2026-01-05-001",
+      "name": "Climatizador de Ar Frio 4,5L 220V",
+      "category": "eletrodomestico",
+      "vendor": "Amazon",
+      "price": 628.0,
+      "oldPrice": null,
+      "image": "https://m.media-amazon.com/images/I/61SrntjhhlL._AC_SX569_.jpg",
+      "affiliateUrl": "https://amzn.to/4posK44",
+      "score": 78
+    },
+    {
+      "id": "2026-01-05-002",
+      "name": "Purificador de Água Gelada Fria e Natural Elétrico Compacto Eletronico placa Electrolux Filtro refil 6 meses ou 3000l Painel Touch Bivolt Grafite PE12",
+      "category": "casa-e-cozinha",
+      "vendor": "Amazon",
+      "price": 809.0,
+      "oldPrice": null,
+      "image": "https://m.media-amazon.com/images/I/51NFGyGQN8L._SX522_.jpg",
+      "affiliateUrl": "https://amzn.to/49sKZQ8",
+      "score": 78
+    },
+    {
+      "id": "2026-01-05-003",
+      "name": "Sanduicheira Elétrica Cadence Click - 127V",
+      "category": "casa-e-cozinha",
+      "vendor": "Amazon",
+      "price": 159.9,
+      "oldPrice": null,
+      "image": "https://m.media-amazon.com/images/I/51UxR8FHe-L._AC_SX679_.jpg",
+      "affiliateUrl": "https://amzn.to/4sqj1x3",
+      "score": 78
+    },
+    {
+      "id": "2026-01-05-004",
+      "name": "Garrafa térmica Quick Flip Stanley|710ml",
+      "category": "casa-e-cozinha",
+      "vendor": "Amazon",
+      "price": 269.0,
+      "oldPrice": null,
+      "image": "https://m.media-amazon.com/images/I/51d113F-cPL._AC_SX679_.jpg",
+      "affiliateUrl": "https://amzn.to/49sWuaf",
+      "score": 78
+    },
+    {
+      "id": "2026-01-05-005",
+      "name": "WAP Parafusadeira e Furadeira à Bateria 12V BPF-12K3, Kit de 13 Acessórios e Maleta, Empunhadura Emborrachada, Bivolt",
+      "category": "construcao",
+      "vendor": "Amazon",
+      "price": 149.14,
+      "oldPrice": null,
+      "image": "https://m.media-amazon.com/images/I/81hJD-odFeL._AC_SX679_.jpg",
+      "affiliateUrl": "https://amzn.to/495XWQW",
+      "score": 78
+    },
+    {
+      "id": "2026-01-05-006",
+      "name": "Fire TV Stick HD (Geração mais recente) | Com controle remoto por voz com Alexa (inclui comandos de TV), controles de casa inteligente e streaming em HD",
+      "category": "eletronico",
+      "vendor": "Amazon",
+      "price": 332.09,
+      "oldPrice": null,
+      "image": "https://m.media-amazon.com/images/I/61Lg5RZZFQL._AC_SX679_.jpg",
+      "affiliateUrl": "https://amzn.to/4q9LiGF",
+      "score": 78
+    },
+    {
+      "id": "2026-01-05-007",
+      "name": "Smart Tv 58 Philco Led 4k Google Tv Hdr10 P58kga",
+      "category": "eletronico",
+      "vendor": "Mercado Livre",
+      "price": 3284.29,
+      "oldPrice": null,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_922530-MLA99453302308_112025-O.webp",
+      "affiliateUrl": "https://mercadolivre.com/sec/1e1AbSS",
+      "score": 78
+    },
+    {
+      "id": "2026-01-05-008",
+      "name": "Projetor Hy320 Davely Smart TV Android WiFi6 390 ANSI Lumens Full HD 4K Mini Projetor Portátil Preto com Controle Remoto",
+      "category": "eletronico",
+      "vendor": "Mercado Livre",
+      "price": 339.0,
+      "oldPrice": null,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_747790-MLA99938308215_112025-F.webp",
+      "affiliateUrl": "https://mercadolivre.com/sec/2j5DEvs",
+      "score": 78
+    },
+    {
+      "id": "2026-01-05-009",
+      "name": "Aspirador De Pó e Água Wap Gtw 10 Compacto 1400w 10 Litros Amarelo/Preto",
+      "category": "eletronico",
+      "vendor": "Mercado Livre",
+      "price": 399.0,
+      "oldPrice": null,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_944970-MLA99949674111_112025-F.webp",
+      "affiliateUrl": "https://mercadolivre.com/sec/1UBFhzN",
+      "score": 78
+    },
+    {
+      "id": "2026-01-05-010",
+      "name": "Fritadeira sem óleo air fryer 4L Mondial 1500W AFN-40-BFT",
+      "category": "casa-e-cozinha",
+      "vendor": "Mercado Livre",
+      "price": 479.0,
+      "oldPrice": null,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_775407-MLA99776749612_122025-F.webp",
+      "affiliateUrl": "https://mercadolivre.com/sec/1wAENLR",
+      "score": 78
+    }
+  ]
+}

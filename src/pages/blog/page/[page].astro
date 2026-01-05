@@ -23,6 +23,8 @@ export async function getStaticPaths() {
   const PAGE_SIZE = 12;
 
   const all = (await getCollection("blog"))
+    // Evita slugs com subpastas (ex: "bkp/post"), que quebram a rota /blog/[slug]
+    .filter((p) => !p.slug.includes("/"))
     .filter((p) => !p.data?.draft)
     .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()) as unknown as BlogEntry[];
 
@@ -38,6 +40,8 @@ export async function getStaticPaths() {
 const PAGE_SIZE = 12;
 
 const all = (await getCollection("blog"))
+  // Evita slugs com subpastas (ex: "bkp/post"), que quebram a rota /blog/[slug]
+  .filter((p) => !p.slug.includes("/"))
   .filter((p) => !p.data?.draft)
   .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()) as unknown as BlogEntry[];
 

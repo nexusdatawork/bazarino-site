@@ -9,6 +9,8 @@ import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts
+    // Evita slugs com subpastas (ex: "bkp/post"), que quebram a rota /blog/[slug]
+    .filter((p) => !p.slug.includes("/"))
     .filter((p) => !p.data.draft)
     .map((p) => ({ params: { slug: p.slug } }));
 }
@@ -16,7 +18,7 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 
 const posts = await getCollection("blog");
-const entry = posts.find((p) => p.slug === slug);
+const entry = posts.find((p) => p.slug === slug && !p.slug.includes("/"));
 
 if (!entry) {
   return Astro.redirect("/404");
