@@ -29,6 +29,35 @@ const { title = "Bazarino" } = Astro.props;
     />
 
     {/* SEO extra por página (canonical, og, json-ld etc) */}
+    
+    {/*
+      Schema.org (Organization + WebSite)
+      Ajuda o Google a entender que "O Bazarino" é uma entidade/brand, não só um site.
+    */}
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": `${Astro.site}#organization`,
+          "name": "O Bazarino",
+          "url": `${Astro.site}`,
+          "logo": {
+            "@type": "ImageObject",
+            "url": `${Astro.site}bazarino.png`
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${Astro.site}#website`,
+          "url": `${Astro.site}`,
+          "name": "O Bazarino",
+          "publisher": { "@id": `${Astro.site}#organization` },
+          "inLanguage": "pt-BR"
+        }
+      ]
+    })} />
+
     <slot name="head" />
   </head>
 
