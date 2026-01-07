@@ -22,3 +22,56 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# === Playwright / Browser profiles ===
+pw_ml_profile/
+**/pw_*/ 
+**/playwright-profile/
+**/browser-profile/
+
+# === Storage / sessões / cache ===
+**/Default/
+**/IndexedDB/
+**/Local Storage/
+**/Session Storage/
+**/Sync Data/
+**/shared_proto_db/
+**/*.leveldb
+
+# === Logs ===
+*.log
+
+# === Temporários ===
+*.tmp
+*.cache
+
+# Scripts de scrape
+/scrapers/
+/scripts/
+/*.js
+
+# Arquivos temporários
+*.csv
+*.log
+*.tmp
+
+# Dumps e testes
+*_debug.json
+*_temp.json
+
+# Zips (não versionar)
+*.zip
+
+# Outputs do scrape / build outputs
+outputs/
+
+# Tokens / credenciais
+token.json
+*.token.json
+*.secrets.json
+.env
+.env.*
+
+# Playwright profile (você já tem, mas reforço)
+pw_ml_profile/
+
