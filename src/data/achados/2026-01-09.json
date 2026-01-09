@@ -1,0 +1,119 @@
+{
+  "date": "2026-01-09",
+  "type": "daily",
+  "title": "Achados do dia 09/01",
+  "kicker": "Curadoria diária",
+  "intro": "Ofertas com bom custo-benefício, avaliadas por preço, reputação e relevância. Links diretos, sem pegadinha.",
+  "items": [
+    {
+      "id": "MLB18725308",
+      "name": "Creatina Monohidratada 500g Soldiers Nutrition 100% Pura Importada Alta Performance Músculo Treino Sem Sabor",
+      "category": "esportes-e-fitness",
+      "vendor": "Mercado Livre",
+      "price": 39.9,
+      "oldPrice": 159.9,
+      "image": "https://http2.mlstatic.com/D_Q_NP_2X_697375-MLA100080368213_122025-AB.webp",
+      "affiliateUrl": "https://mercadolivre.com/sec/2M9jH45",
+      "score": 92
+    },
+    {
+      "id": "23096150316",
+      "name": "KIT 1/KIT 2/KIT 5 Suporte De Parede Multifuncional Caixa De Armazenamento Cas...",
+      "category": "celulares-e-dispositivos",
+      "vendor": "Shopee",
+      "price": 7.99,
+      "oldPrice": 21.59,
+      "image": "https://cf.shopee.com.br/file/br-11134207-81z1k-mgiqg3neio0589",
+      "affiliateUrl": "https://s.shopee.com.br/1gCEkuqd42",
+      "score": 91
+    },
+    {
+      "id": "MLB18725310",
+      "name": "Creatina Monohidratada 1kg Soldiers Nutrition 100% Pura Importada Alta Performance Músculo Treino",
+      "category": "esportes-e-fitness",
+      "vendor": "Mercado Livre",
+      "price": 68.33,
+      "oldPrice": 239.9,
+      "image": "https://http2.mlstatic.com/D_Q_NP_2X_736821-MLA99962382095_112025-AB.webp",
+      "affiliateUrl": "https://mercadolivre.com/sec/1fq5nJN",
+      "score": 88
+    },
+    {
+      "id": "22693482091",
+      "name": "KIT 12 Peças de Utensílios Para Cozinha em Silicone e Bambu",
+      "category": "casa-e-decoracao",
+      "vendor": "Shopee",
+      "price": 29.0,
+      "oldPrice": 100.0,
+      "image": "https://cf.shopee.com.br/file/sg-11134201-7rdx1-m1egwx31u1x61f",
+      "affiliateUrl": "https://s.shopee.com.br/4q9GWjilcu",
+      "score": 88
+    },
+    {
+      "id": "20997608223",
+      "name": "Caixa de som Bluetooth Portátil Com Led RGB Portátil FM USB TWS 30W Para Prai...",
+      "category": "audio",
+      "vendor": "Shopee",
+      "price": 99.97,
+      "oldPrice": 302.94,
+      "image": "https://cf.shopee.com.br/file/br-11134207-7r98o-lqo1mmf95gcjc2",
+      "affiliateUrl": "https://s.shopee.com.br/3VdswHjeLB",
+      "score": 84
+    },
+    {
+      "id": "21397760996",
+      "name": "Escova Eletrica De Limpeza 9 in 1 Banheiro e Cozinha Ferramenta Recarregável ...",
+      "category": "casa-e-decoracao",
+      "vendor": "Shopee",
+      "price": 28.98,
+      "oldPrice": 87.82,
+      "image": "https://cf.shopee.com.br/file/br-11134207-81ztc-mj8x2mvwpi4ic7",
+      "affiliateUrl": "https://s.shopee.com.br/4VWQ87k2Iw",
+      "score": 83
+    },
+    {
+      "id": "15461251514",
+      "name": "1/3/5 Afiador De Faca 3 Estágios Amolador Profissional Com Afiação Rápida Em ...",
+      "category": "casa-e-decoracao",
+      "vendor": "Shopee",
+      "price": 12.98,
+      "oldPrice": 25.96,
+      "image": "https://cf.shopee.com.br/file/br-11134207-7r98o-mdcy2bgropwy0e",
+      "affiliateUrl": "https://s.shopee.com.br/gJhZ4uR5s",
+      "score": 82
+    },
+    {
+      "id": "20099845178",
+      "name": "Extensão 5 Tomadas 4 USB 2 TypeC Universal Bivolt 110v/220v 2500W Power 2m Fi...",
+      "category": "eletrodomesticos",
+      "vendor": "Shopee",
+      "price": 28.96,
+      "oldPrice": 85.18,
+      "image": "https://cf.shopee.com.br/file/br-11134207-7r98o-md0gyfzrtrep9e",
+      "affiliateUrl": "https://s.shopee.com.br/5L5X7egrcD",
+      "score": 82
+    },
+    {
+      "id": "44355224942",
+      "name": "Kit com 15 potes plásticos herméticos para cozinha",
+      "category": "casa-e-decoracao",
+      "vendor": "Shopee",
+      "price": 21.34,
+      "oldPrice": 44.46,
+      "image": "https://cf.shopee.com.br/file/sg-11134201-7raum-mb75u6rh8o7ke0",
+      "affiliateUrl": "https://s.shopee.com.br/3qGjKtiNfH",
+      "score": 80
+    },
+    {
+      "id": "22493074371",
+      "name": "Varal De Chão Roupa Calcinha Prateleiras 3 Andares Dobrável Portátil",
+      "category": "casa-e-decoracao",
+      "vendor": "Shopee",
+      "price": 69.97,
+      "oldPrice": 199.91,
+      "image": "https://cf.shopee.com.br/file/br-11134207-7r98o-lx9qolhaesnm1a",
+      "affiliateUrl": "https://s.shopee.com.br/2B8VLpoj33",
+      "score": 78
+    }
+  ]
+}

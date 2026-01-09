@@ -90,6 +90,7 @@ missing_*_categories_*.json
 shop_parse.cjs
 shopee_parse_category.py
 shopee_scrape_ofertas.py
+bazarino_garimpo_parse_json.py
 
 # --- ACHADOS DO SITE (VERSIONAR) ---
 !src/data/
