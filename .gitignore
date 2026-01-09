@@ -64,6 +64,8 @@ pw_ml_profile/
 
 # Outputs do scrape / build outputs
 outputs/
+category_pages/
+scrape/
 
 # Tokens / credenciais
 token.json
@@ -75,3 +77,21 @@ token.json
 # Playwright profile (você já tem, mas reforço)
 pw_ml_profile/
 
+# Arquivos gerados
+garimpo_*.csv
+missing_*_categories_*.csv
+missing_*_categories_*.json
+*_db.csv
+*_db.json
+
+
+# --- SCRAPING / AUTOMAÇÃO (NÃO VERSIONAR) ---
+.pw-shopee-profile/
+shop_parse.cjs
+shopee_parse_category.py
+shopee_scrape_ofertas.py
+
+# --- ACHADOS DO SITE (VERSIONAR) ---
+!src/data/
+!src/data/achados/
+!src/data/achados/*.json

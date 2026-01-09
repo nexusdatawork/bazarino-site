@@ -14,7 +14,8 @@
       "oldPrice": 203.58,
       "image": "https://http2.mlstatic.com/D_Q_NP_2X_765785-MLA99966294209_112025-AB.webp",
       "affiliateUrl": "https://mercadolivre.com/sec/2GgFqNq",
-      "score": 301
+      "score": 49,
+      "discountPct": 70.58
     },
     {
       "id": "MLB22813942",
@@ -25,7 +26,8 @@
       "oldPrice": 216.99,
       "image": "https://http2.mlstatic.com/D_Q_NP_2X_891963-MLA99491187230_112025-AB.webp",
       "affiliateUrl": "https://mercadolivre.com/sec/2vC8jfz",
-      "score": 284
+      "score": 43,
+      "discountPct": 61.86
     },
     {
       "id": "MLB21814751",
@@ -36,7 +38,8 @@
       "oldPrice": 269.8,
       "image": "https://http2.mlstatic.com/D_Q_NP_2X_824835-MLA91374243603_082025-AB.webp",
       "affiliateUrl": "https://mercadolivre.com/sec/1rYkodp",
-      "score": 263
+      "score": 39,
+      "discountPct": 57.04
     },
     {
       "id": "MLB22530387",
@@ -47,7 +50,8 @@
       "oldPrice": 479.9,
       "image": "https://http2.mlstatic.com/D_Q_NP_2X_775407-MLA99776749612_122025-AB.webp",
       "affiliateUrl": "https://mercadolivre.com/sec/2mVHiKH",
-      "score": 259
+      "score": 34,
+      "discountPct": 54.18
     },
     {
       "id": "MLB23999810",
@@ -58,7 +62,8 @@
       "oldPrice": 479.9,
       "image": "https://http2.mlstatic.com/D_Q_NP_2X_866262-MLA99776946004_122025-AB.webp",
       "affiliateUrl": "https://mercadolivre.com/sec/2QWsEqy",
-      "score": 259
+      "score": 34,
+      "discountPct": 54.18
     },
     {
       "id": "MLB38053317",
@@ -69,7 +74,8 @@
       "oldPrice": 321.54,
       "image": "https://http2.mlstatic.com/D_Q_NP_2X_683617-MLA99862544303_112025-AB.webp",
       "affiliateUrl": "https://mercadolivre.com/sec/2M1nKyQ",
-      "score": 240
+      "score": 33,
+      "discountPct": 50.27
     },
     {
       "id": "MLB30144703",
@@ -80,7 +86,8 @@
       "oldPrice": 399.9,
       "image": "https://http2.mlstatic.com/D_Q_NP_2X_865332-MLA96868279679_102025-AB.webp",
       "affiliateUrl": "https://mercadolivre.com/sec/1UuAVqa",
-      "score": 239
+      "score": 32,
+      "discountPct": 50.01
     },
     {
       "id": "MLB32717965",
@@ -91,7 +98,8 @@
       "oldPrice": 1099.0,
       "image": "https://http2.mlstatic.com/D_Q_NP_2X_803604-MLA95708299394_102025-AB.webp",
       "affiliateUrl": "https://mercadolivre.com/sec/1e5sLCT",
-      "score": 237
+      "score": 27,
+      "discountPct": 49.01
     },
     {
       "id": "MLB44119805",
@@ -102,7 +110,8 @@
       "oldPrice": 1641.0,
       "image": "https://http2.mlstatic.com/D_Q_NP_2X_692611-MLA99898164133_112025-AB.webp",
       "affiliateUrl": "https://mercadolivre.com/sec/2N8Uh48",
-      "score": 235
+      "score": 17,
+      "discountPct": 47.95
     },
     {
       "id": "MLB25929487",
@@ -113,7 +122,8 @@
       "oldPrice": 129.9,
       "image": "https://http2.mlstatic.com/D_Q_NP_2X_848860-MLA99964507641_112025-AB.webp",
       "affiliateUrl": "https://mercadolivre.com/sec/2Nn9N1i",
-      "score": 231
+      "score": 33,
+      "discountPct": 42.34
     }
   ]
 }
