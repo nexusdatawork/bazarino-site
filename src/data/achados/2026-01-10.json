@@ -1,0 +1,119 @@
+{
+  "date": "2026-01-10",
+  "type": "daily",
+  "title": "Achados do dia 10/01",
+  "kicker": "Curadoria diária",
+  "intro": "Ofertas com bom custo-benefício, avaliadas por preço, reputação e relevância. Links diretos, sem pegadinha.",
+  "items": [
+    {
+      "id": "40723848736",
+      "name": "Kit Completo Karseell Máscara 500 g + condicionador 1L + Shampoo 1L + Óleo ka...",
+      "category": "beleza",
+      "vendor": "Shopee",
+      "price": 55.0,
+      "oldPrice": 343.75,
+      "image": "https://cf.shopee.com.br/file/sg-11134201-824gh-mfrkm01jz18p35",
+      "affiliateUrl": "https://s.shopee.com.br/9Uv79et7s9",
+      "score": 93
+    },
+    {
+      "id": "MLB18725308",
+      "name": "Creatina Monohidratada 500g Soldiers Nutrition 100% Pura Importada Alta Performance Músculo Treino Sem Sabor",
+      "category": "suplementos",
+      "vendor": "Mercado Livre",
+      "price": 39.9,
+      "oldPrice": 159.9,
+      "image": "https://http2.mlstatic.com/D_Q_NP_2X_697375-MLA100080368213_122025-AB.webp",
+      "affiliateUrl": "https://mercadolivre.com/sec/2M9jH45",
+      "score": 92
+    },
+    {
+      "id": "22393689713",
+      "name": "Forro Antiderrapante Para ArmáRio, Gaveta, Geladeira E Guarda Roupas- Transpa...",
+      "category": "casa-e-decoracao",
+      "vendor": "Shopee",
+      "price": 24.99,
+      "oldPrice": 80.61,
+      "image": "https://cf.shopee.com.br/file/br-11134207-7r98o-mbudiotcdwt551",
+      "affiliateUrl": "https://s.shopee.com.br/1LZPQeSgUL",
+      "score": 92
+    },
+    {
+      "id": "22497753584",
+      "name": "Short Alfaiataria Feminino Social com Cinto Cintura Alta PROMOÇÃO",
+      "category": "roupas-femininas",
+      "vendor": "Shopee",
+      "price": 19.9,
+      "oldPrice": 79.6,
+      "image": "https://cf.shopee.com.br/file/sg-11134201-7rdxo-m0n1zeuajhj8be",
+      "affiliateUrl": "https://s.shopee.com.br/1VspcxS39M",
+      "score": 92
+    },
+    {
+      "id": "23194069750",
+      "name": "kit c/3 Sutiã Básico Reforçado de Microfibra Com Bojo do P ao GG PROMOÇÃO",
+      "category": "roupas-femininas",
+      "vendor": "Shopee",
+      "price": 16.85,
+      "oldPrice": 60.17,
+      "image": "https://cf.shopee.com.br/file/br-11134207-7r98o-maint212avp508",
+      "affiliateUrl": "https://s.shopee.com.br/8V2Zxowvu7",
+      "score": 92
+    },
+    {
+      "id": "MLB18725310",
+      "name": "Creatina Monohidratada 1kg Soldiers Nutrition 100% Pura Importada Alta Performance Músculo Treino",
+      "category": "suplementos",
+      "vendor": "Mercado Livre",
+      "price": 68.33,
+      "oldPrice": 239.9,
+      "image": "https://http2.mlstatic.com/D_Q_NP_2X_736821-MLA99962382095_112025-AB.webp",
+      "affiliateUrl": "https://mercadolivre.com/sec/1fq5nJN",
+      "score": 88
+    },
+    {
+      "id": "23194188328",
+      "name": "Tônico anti queda Karseell Modvida Crescimento",
+      "category": "beleza",
+      "vendor": "Shopee",
+      "price": 34.0,
+      "oldPrice": 147.82,
+      "image": "https://cf.shopee.com.br/file/sg-11134201-7rdxk-mbnottovmkit5a",
+      "affiliateUrl": "https://s.shopee.com.br/W0IR7RO8J",
+      "score": 87
+    },
+    {
+      "id": "MLB3239976866",
+      "name": "Kit 6 Pares Meias Puma Cano Médio Alto Atoalhada Original",
+      "category": "moda",
+      "vendor": "Mercado Livre",
+      "price": 53.89,
+      "oldPrice": 214.9,
+      "image": "https://http2.mlstatic.com/D_Q_NP_2X_617361-MLB54128842596_032023-AB-kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original.webp",
+      "affiliateUrl": "https://mercadolivre.com/sec/1LeubS3",
+      "score": 86
+    },
+    {
+      "id": "23794330101",
+      "name": "Porta Ovos 4 Andares Rolante em Plástico para Geladeira Organizador 20 a 30 Ovos",
+      "category": "casa-e-decoracao",
+      "vendor": "Shopee",
+      "price": 11.98,
+      "oldPrice": 33.27,
+      "image": "https://cf.shopee.com.br/file/br-11134207-7r98o-mdq1kgvrfpvdba",
+      "affiliateUrl": "https://s.shopee.com.br/20p6DsQ98X",
+      "score": 86
+    },
+    {
+      "id": "41772720401",
+      "name": "Top Academia Fitness Duplo Poliamida Suplex Premium Alça Grossa Com Sustentaç...",
+      "category": "esportes-e-atividades-ao-ar-livre",
+      "vendor": "Shopee",
+      "price": 21.9,
+      "oldPrice": 60.83,
+      "image": "https://cf.shopee.com.br/file/sg-11134201-824jc-mfd8ajf14d1l01",
+      "affiliateUrl": "https://s.shopee.com.br/AUneLUtmsw",
+      "score": 81
+    }
+  ]
+}
